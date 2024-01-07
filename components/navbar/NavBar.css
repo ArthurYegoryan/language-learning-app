@@ -1,0 +1,13 @@
+.navbar {
+    display: flex;
+    width: 100%;
+}
+
+.reg-login-part {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.link {
+    margin-right: 10px;
+}

@@ -1,0 +1,8 @@
+.link {
+    list-style: none;
+    cursor: pointer;
+}
+
+.link > a {
+    text-decoration: none;
+}
