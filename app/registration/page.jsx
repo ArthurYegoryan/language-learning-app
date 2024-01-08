@@ -30,7 +30,14 @@ const Registration = () => {
     // teacher add info
     const [ workPlace, setWorkPlace ] = useState("");
     const [ experienceTime, setExperienceTime ] = useState(0);
-    const [ languages, setLanguages ] = useState([]);
+    const [ languages, setLanguages ] = useState([]);           // for student too
+
+    // student add info
+    const [ studies, setStudies ] = useState("");
+    const [ studyPlace, setStudyPlace ] = useState("");
+    const [ works, setWorks ] = useState("");
+    const [ studentWorkPlace, setStudentWorkPlace ] = useState("");
+    const [ studiedProgrammingLanguage, setStudiedProgrammingLanguage ] = useState("");
 
     const languageCheckHandler = (evt) => {
         const { value, checked } = evt.target;
@@ -59,14 +66,27 @@ const Registration = () => {
         languages
     };
 
+    const studentAddInfo = {
+        studies,
+        studyPlace,
+        works,
+        studentWorkPlace,
+        studiedProgrammingLanguage,
+        languages
+    }
+
     const firstFormOnSubmitHandler = () => {
         setShowMainRegistration(false);
     };
 
-    const teacherFormOnSubmitHandler = async (evt) => {
+    const userFormOnSubmitHandler = async (evt) => {
         evt.preventDefault();
 
-        const added = await addDataToFireStore(userInfo, teacherAddInfo);
+        let userAddInfo;
+        if (role === "teacher") userAddInfo = teacherAddInfo;
+        else userAddInfo = studentAddInfo;
+
+        const added = await addDataToFireStore(userInfo, userAddInfo);
 
         if (added) {
             setUsername("");
@@ -75,10 +95,12 @@ const Registration = () => {
             setEmail("");
             setPassword("");
             setRole("");
+            setShowMainRegistration(true);
+            setLanguages([]);
         }
 
         console.log("User info: " + JSON.stringify({...userInfo, ...teacherAddInfo}));
-        console.log("Teacher registered successfully!.");
+        console.log("User registered successfully!.");
     };
 
     return (
@@ -119,7 +141,7 @@ const Registration = () => {
             {!showMainRegistration && role === "teacher" &&
                 <div className="registration-area">
                     <p>Teacher additional information</p>
-                    <form action="" onSubmit={teacherFormOnSubmitHandler}>
+                    <form onSubmit={userFormOnSubmitHandler}>
                         <input type="text" placeholder="Where are you work now?" onChange={(evt) => setWorkPlace(evt.target.value)} />
                         <input type="text" placeholder="How many years experience you have?" onChange={(evt) => setExperienceTime(evt.target.value)} />
 
@@ -128,6 +150,66 @@ const Registration = () => {
                         <label htmlFor="javascript">JavaScript</label>
                         <input type="checkbox" id="php" name="languages" value="php" onChange={languageCheckHandler} />
                         <label htmlFor="php">PHP</label>
+                        <input type="checkbox" id="python" name="languages" value="python" onChange={languageCheckHandler} />
+                        <label htmlFor="python">Python</label>
+                        <input type="checkbox" id="c#" name="languages" value="c#" onChange={languageCheckHandler} />
+                        <label htmlFor="c#">C#</label>
+                        <input type="checkbox" id="c++" name="languages" value="c++" onChange={languageCheckHandler} />
+                        <label htmlFor="c++">C++</label>
+                        <input type="checkbox" id="java" name="languages" value="java" onChange={languageCheckHandler} />
+                        <label htmlFor="java">Java</label>
+
+                        <button onClick={() => {
+                            setShowMainRegistration(true);
+                        }}>Previous page</button>
+                        <button>Finish registration!</button>
+                    </form>
+                </div>
+            }
+            {!showMainRegistration && role === "student" &&
+                <div className="registration-area">
+                    <p>Student additional information</p>
+                    <form onSubmit={userFormOnSubmitHandler}>
+                        <p>Do you study?</p>
+                        <label htmlFor="studies">Yes</label>
+                        <input type="radio" id="studies" name="studentStudies" value="yes" onChange={(evt) => setStudies(evt.target.value)} />
+                        <label htmlFor="notStudies">No</label>
+                        <input type="radio" id="notStudies" name="studentStudies" value="no" onChange={(evt) => setStudies(evt.target.value)} />
+                        {studies === "yes" &&
+                            <input type="text" placeholder="Where do you study?" onChange={(evt) => setStudyPlace(evt.target.value)} />
+                        }
+
+                        <p>Do you work?</p>
+                        <label htmlFor="works">Yes</label>
+                        <input type="radio" id="works" name="studentWorks" value="yes" onChange={(evt) => setWorks(evt.target.value)} />
+                        <label htmlFor="notWork">No</label>
+                        <input type="radio" id="notWork" name="studentWorks" value="no" onChange={(evt) => setWorks(evt.target.value)} />
+                        {works === "yes" &&
+                            <input type="text" placeholder="Where do you work?" onChange={(evt) => setStudentWorkPlace(evt.target.value)} />
+                        }
+
+                        <p>Have you learn any programming language before?</p>
+                        <label htmlFor="studiedBefore">Yes</label>
+                        <input type="radio" id="studiedBefore" name="studentStudiedBefore" value="yes" onChange={(evt) => setStudiedProgrammingLanguage(evt.target.value)} />
+                        <label htmlFor="notStudiedBefore">No</label>
+                        <input type="radio" id="notStudiedBefore" name="studentStudiedBefore" value="no" onChange={(evt) => setStudiedProgrammingLanguage(evt.target.value)} />
+                        {studiedProgrammingLanguage === "yes" &&
+                            <>
+                                <p>What type of languages do you know?</p>
+                                <input type="checkbox" id="javascript" name="languages" value="javascript" onChange={languageCheckHandler} />
+                                <label htmlFor="javascript">JavaScript</label>
+                                <input type="checkbox" id="php" name="languages" value="php" onChange={languageCheckHandler} />
+                                <label htmlFor="php">PHP</label>
+                                <input type="checkbox" id="python" name="languages" value="python" onChange={languageCheckHandler} />
+                                <label htmlFor="python">Python</label>
+                                <input type="checkbox" id="c#" name="languages" value="c#" onChange={languageCheckHandler} />
+                                <label htmlFor="c#">C#</label>
+                                <input type="checkbox" id="c++" name="languages" value="c++" onChange={languageCheckHandler} />
+                                <label htmlFor="c++">C++</label>
+                                <input type="checkbox" id="java" name="languages" value="java" onChange={languageCheckHandler} />
+                                <label htmlFor="java">Java</label>
+                            </>
+                        }
 
                         <button onClick={() => {
                             setShowMainRegistration(true);
