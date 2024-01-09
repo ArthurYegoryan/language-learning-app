@@ -6,6 +6,7 @@ import { collection, addDoc } from "firebase/firestore";
 import MainRegistrationPage from "./mainRegistrationPage/MainRegistrationPage";
 import TeacherAddInfoPage from "./teacherAddInfoPage/TeacherAddInfoPage";
 import { useState } from "react";
+import StudentAddInfoPage from "./studentAddInfoPage/StudentAddInfoPage";
 
 const addUserDataToFireStore = async (userInfo, roleInfo) => {
     try {
@@ -125,56 +126,18 @@ const RegistrationSection = () => {
                 />
             }
             {!showMainRegistration && role === "student" &&
-                <div className="registration-area">
-                    <p>Student additional information</p>
-                    <form onSubmit={userFormOnSubmitHandler}>
-                        <p>Do you study?</p>
-                        <label htmlFor="studies">Yes</label>
-                        <input type="radio" id="studies" name="studentStudies" value="yes" onChange={(evt) => setStudies(evt.target.value)} />
-                        <label htmlFor="notStudies">No</label>
-                        <input type="radio" id="notStudies" name="studentStudies" value="no" onChange={(evt) => setStudies(evt.target.value)} />
-                        {studies === "yes" &&
-                            <input type="text" placeholder="Where do you study?" onChange={(evt) => setStudyPlace(evt.target.value)} />
-                        }
-
-                        <p>Do you work?</p>
-                        <label htmlFor="works">Yes</label>
-                        <input type="radio" id="works" name="studentWorks" value="yes" onChange={(evt) => setWorks(evt.target.value)} />
-                        <label htmlFor="notWork">No</label>
-                        <input type="radio" id="notWork" name="studentWorks" value="no" onChange={(evt) => setWorks(evt.target.value)} />
-                        {works === "yes" &&
-                            <input type="text" placeholder="Where do you work?" onChange={(evt) => setStudentWorkPlace(evt.target.value)} />
-                        }
-
-                        <p>Have you learn any programming language before?</p>
-                        <label htmlFor="studiedBefore">Yes</label>
-                        <input type="radio" id="studiedBefore" name="studentStudiedBefore" value="yes" onChange={(evt) => setStudiedProgrammingLanguage(evt.target.value)} />
-                        <label htmlFor="notStudiedBefore">No</label>
-                        <input type="radio" id="notStudiedBefore" name="studentStudiedBefore" value="no" onChange={(evt) => setStudiedProgrammingLanguage(evt.target.value)} />
-                        {studiedProgrammingLanguage === "yes" &&
-                            <>
-                                <p>What type of languages do you know?</p>
-                                <input type="checkbox" id="javascript" name="languages" value="javascript" onChange={languageCheckHandler} />
-                                <label htmlFor="javascript">JavaScript</label>
-                                <input type="checkbox" id="php" name="languages" value="php" onChange={languageCheckHandler} />
-                                <label htmlFor="php">PHP</label>
-                                <input type="checkbox" id="python" name="languages" value="python" onChange={languageCheckHandler} />
-                                <label htmlFor="python">Python</label>
-                                <input type="checkbox" id="c#" name="languages" value="c#" onChange={languageCheckHandler} />
-                                <label htmlFor="c#">C#</label>
-                                <input type="checkbox" id="c++" name="languages" value="c++" onChange={languageCheckHandler} />
-                                <label htmlFor="c++">C++</label>
-                                <input type="checkbox" id="java" name="languages" value="java" onChange={languageCheckHandler} />
-                                <label htmlFor="java">Java</label>
-                            </>
-                        }
-
-                        <button onClick={() => {
-                            setShowMainRegistration(true);
-                        }}>Previous page</button>
-                        <button>Finish registration!</button>
-                    </form>
-                </div>
+                <StudentAddInfoPage userFormOnSubmitHandler={userFormOnSubmitHandler}
+                                    setStudies={setStudies}
+                                    studies={studies}
+                                    setStudyPlace={setStudyPlace}
+                                    setWorks={setWorks}
+                                    works={works}
+                                    setStudentWorkPlace={setStudentWorkPlace}
+                                    setStudiedProgrammingLanguage={setStudiedProgrammingLanguage}
+                                    studiedProgrammingLanguage={studiedProgrammingLanguage}
+                                    languageCheckHandler={languageCheckHandler}
+                                    setShowMainRegistration={setShowMainRegistration}
+                />
             }
         </section>
     );
