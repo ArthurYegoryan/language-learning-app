@@ -1,0 +1,36 @@
+.p-sign-up {
+    text-align: center;
+    color: aqua;
+    font-size: 30px;
+}
+
+.reg-input-div {
+    margin-bottom: 5px;
+}
+
+.reg-role-input-div {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.reg-input-radio-div {
+    color: aqua;
+    font-size: 20px;
+}
+
+.reg-continue-button-div {
+    text-align: center;
+}
+
+.reg-continue-button {
+    font-size: 20px;
+    background-color: green;
+    color: aqua;
+}
+
+.role-error-text {
+    color: red;
+    width: 200px;
+    margin-top: 0;
+}

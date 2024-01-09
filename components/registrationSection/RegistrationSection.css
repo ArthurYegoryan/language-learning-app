@@ -1,0 +1,12 @@
+body {
+    margin: 0;
+    background-color: blue;
+}
+
+.registration-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 97vh;
+}
