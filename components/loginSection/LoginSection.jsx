@@ -8,6 +8,8 @@ import Input from "@/generalComponents/inputComponents/generalInputComponent/Inp
 import Button from "@/generalComponents/button/Button.component";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { logIn, logOut } from "@/redux/features/authSlice";
+import { useDispatch } from "react-redux";
 
 const fetchUserDataFromFirestore = async () => {
     const querySnapshot = await getDocs(collection(db, "users"));
@@ -26,6 +28,7 @@ const LoginSection = () => {
     const [ userData, setUserData ] = useState([]);
     const [ showErrorUserPass, setShowErrorUserPass ] = useState(false);
     const { push } = useRouter();
+    const dispatch = useDispatch();
 
     useEffect(() => {
         const fetchUserData = async () => {
@@ -40,6 +43,9 @@ const LoginSection = () => {
 
         userData.forEach((user) => {
             if (user.username === username && user.password === password) {
+                console.log(username);
+                dispatch(logIn(username));
+
                 if (user.role === "student") {
                     push("/student");
                 } else {

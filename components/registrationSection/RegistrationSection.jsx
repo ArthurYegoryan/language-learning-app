@@ -7,6 +7,7 @@ import MainRegistrationPage from "./mainRegistrationPage/MainRegistrationPage";
 import TeacherAddInfoPage from "./teacherAddInfoPage/TeacherAddInfoPage";
 import { useState } from "react";
 import StudentAddInfoPage from "./studentAddInfoPage/StudentAddInfoPage";
+import { useRouter } from "next/navigation";
 
 const addUserDataToFireStore = async (userInfo, roleInfo) => {
     try {
@@ -23,6 +24,8 @@ const addUserDataToFireStore = async (userInfo, roleInfo) => {
 }
 
 const RegistrationSection = () => {
+    const { push } = useRouter();
+
     const [ username, setUsername ] = useState("");
     const [ firstname, setFirstname ] = useState("");
     const [ lastname, setLastname ] = useState("");
@@ -103,6 +106,8 @@ const RegistrationSection = () => {
 
         console.log("User info: " + JSON.stringify({...userInfo, ...teacherAddInfo}));
         console.log("User registered successfully!.");
+
+        push("/login");
     };
 
     return (

@@ -1,9 +1,9 @@
-const TeacherPage = () => {
+import TeacherPage from "@/components/teacherSection/TeacherPage";
+
+const Teacher = () => {
     return (
-        <section>
-            Teacher page
-        </section>
+        <TeacherPage />
     );
 };
 
-export default TeacherPage;
+export default Teacher;
