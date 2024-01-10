@@ -27,7 +27,7 @@ const MainRegistrationPage = ({
     return (
         <div className="main-registration-page">
             <P text="Sign up" className="p-sign-up" />
-            <form action="" onSubmit={mainFormOnSubmitHandler}>
+            <form onSubmit={mainFormOnSubmitHandler}>
                 <Input type="text" placeholder="Username" classNameDiv="reg-input-div" onChangeHandler={(evt) => setUsername(evt.target.value)} />
                 <Input type="text" placeholder="First name" classNameDiv="reg-input-div" onChangeHandler={(evt) => setFirstname(evt.target.value)} />
                 <Input type="text" placeholder="Last name" classNameDiv="reg-input-div" onChangeHandler={(evt) => setLastname(evt.target.value)} />

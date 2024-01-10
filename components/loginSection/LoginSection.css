@@ -1,0 +1,38 @@
+body {
+    margin: 0;
+    background-color: blue;
+}
+
+.login-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 97vh;
+}
+
+.p-sign-in {
+    font-size: 30px;
+    text-align: center;
+    color: aqua;
+}
+
+.login-input-div {
+    margin-bottom: 5px;
+}
+
+.login-button-div {
+    text-align: center;
+}
+
+.login-button {
+    background-color: green;
+    margin-top: 10px;
+    color: aqua;
+    font-size: 20px;
+}
+
+.p-invalid-field {
+    margin-top: 5px;
+    color: red;
+}
