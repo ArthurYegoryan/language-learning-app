@@ -4,7 +4,7 @@ const InputRadio = ({
     id,
     value,
     onChangeHandler,
-    classNameDiv
+    classNameDiv = ""
 }) => {
     return (
         <div className={`input-radio ${classNameDiv}`}>

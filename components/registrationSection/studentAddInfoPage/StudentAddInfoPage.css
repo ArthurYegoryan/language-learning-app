@@ -1,0 +1,51 @@
+.student-reg-page {
+    width: 300px;
+}
+
+.p-student-add-info {
+    font-size: 30px;
+    color: aqua;
+    text-align: center;
+}
+
+.p-student-question {
+    font-size: 20px;
+    margin-bottom: 5px;
+    color: white;
+}
+
+.student-question-answer-div {
+    display: flex;
+}
+
+.student-answer-div {
+    margin-right: 10px;
+}
+
+.student-answer-div > label {
+    color: aqua;
+}
+
+.student-answer-input {
+    margin-top: 10px;
+}
+
+.student-language-checkbox > label {
+    color: aqua;
+}
+
+.student-add-info-buttons {
+    display: flex;
+    margin-top: 10px;
+}
+
+.prev-page-button {
+    background-color: rgb(152, 152, 255);
+    color: aqua;
+    margin-right: 20px;
+}
+
+.finish-reg-button {
+    background-color: green;
+    color: aqua;
+}

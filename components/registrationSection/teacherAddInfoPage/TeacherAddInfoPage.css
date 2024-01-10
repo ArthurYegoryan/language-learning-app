@@ -29,13 +29,13 @@
 
 .teacher-add-info-buttons {
     display: flex;
-    justify-content: space-around;
     margin-top: 10px;
 }
 
 .prev-page-button {
     background-color: rgb(152, 152, 255);
     color: aqua;
+    margin-right: 20px;
 }
 
 .finish-reg-button {
