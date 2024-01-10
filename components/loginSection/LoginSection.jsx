@@ -38,12 +38,12 @@ const LoginSection = () => {
     const checkLogin = (evt) => {
         evt.preventDefault();        
 
-        console.log(JSON.stringify(userData, null, 2));
-
         userData.forEach((user) => {
             if (user.username === username && user.password === password) {
                 if (user.role === "student") {
                     push("/student");
+                } else {
+                    push("/teacher");
                 }
             }
         });
