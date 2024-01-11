@@ -1,4 +1,4 @@
-import LinkComponent from "@/generalComponents/linkComponent/LinkComponent";
+import LinkComponent from "@/generalComponents/linkComponents/homeLink/LinkComponent";
 import "./Navbar.css";
 
 const Navbar = () => {

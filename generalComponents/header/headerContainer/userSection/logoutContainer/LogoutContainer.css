@@ -1,0 +1,14 @@
+.logout {
+    margin-top: 10px;
+}
+
+.logout > img {
+    width: 25px;
+}
+
+.button-logout {
+    vertical-align: top;
+    background-color: white;
+    color: gray;
+    font-weight: bold;
+}

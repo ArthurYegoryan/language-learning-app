@@ -1,6 +1,7 @@
 "use client";
 
 import "./TeacherPage.css";
+import Header from "@/generalComponents/header/Header";
 import { useSelector } from "react-redux";
 
 const TeacherPage = () => {
@@ -8,10 +9,7 @@ const TeacherPage = () => {
 
     return (
         <section>
-            <h1>Teacher page</h1>
-            <div>
-                User: {username}
-            </div>
+            <Header />
         </section>
     );
 };

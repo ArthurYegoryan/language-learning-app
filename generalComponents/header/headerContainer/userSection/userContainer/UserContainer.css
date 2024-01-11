@@ -1,0 +1,15 @@
+.user-container {
+    display: flex;
+    margin-right: 10px;
+    border-right: 1px solid gray;
+}
+
+.user-container > img {
+    width: 25px;
+}
+
+.user-container > p {
+    display: block;
+    color: gray;
+    margin-right: 15px;
+}
