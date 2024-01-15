@@ -1,3 +1,4 @@
+import Button from "@/generalComponents/button/Button.component";
 import "./TeacherCoursesArea.css";
 import P from "@/generalComponents/texts/P.component";
 
@@ -17,9 +18,12 @@ const TeacherCoursesArea = ({ coursesData }) => {
                                 <div className="teacher-course-card-info">
                                     <P text={`Creation time: ` + course.createdAt} />
                                 </div>
+                                <div className="see-related-videos-div">
+                                    <Button label="See related videos" className="see-related-videos-button" />
+                                </div>
                             </div>
                         </div>
-                    )
+                    );
                 })}
             </div>
         </div>

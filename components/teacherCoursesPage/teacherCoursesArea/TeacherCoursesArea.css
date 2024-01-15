@@ -18,10 +18,10 @@
 
 .teacher-course-card-coursename {
     text-align: center;
-    font-size: 30px;
+    font-size: 25px;
     font-weight: bold;
     margin-bottom: 0;
-    height: 8vh;
+    height: 4vh;
 }
 
 .teacher-course-card-image-info {
@@ -33,14 +33,28 @@
 }
 
 .teacher-course-card-image > img {
-    width: 100%;
+    width: 90%;
+    margin-left: 5%;
 }
 
 .teacher-course-card-info {
     text-align: center;
-    font-size: 20px;
+    font-size: 18px;
 }
 
 .teacher-course-card-info > p {
     margin-top: 0;
+    margin-bottom: 5px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.see-related-videos-div {
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+.see-related-videos-button {
+    background-color: gray;
+    color: white;
 }
