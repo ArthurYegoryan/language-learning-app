@@ -5,13 +5,13 @@ const NavLinks = () => {
     return (
         <nav className="nav-links">
             <ul>
-               <MenuLink routePath="teacher/videos" 
+               <MenuLink routePath="teacher/courses" 
                          imagePath="/static/images/" 
                          imageName="video" 
                          imageType="svg" 
-                         label="My videos" 
+                         label="My courses" 
                 />
-                <MenuLink routePath="teacher/videos" 
+                <MenuLink routePath="teacher/posts" 
                          imagePath="/static/images/" 
                          imageName="post" 
                          imageType="svg" 

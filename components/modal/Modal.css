@@ -1,0 +1,66 @@
+.modal-container {
+    position: absolute;
+    right: 0;
+    margin-right: 10px;
+    margin-top: 35px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.modal {
+    width: 250px;
+    border: 1px solid gray;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.modal-header {
+    text-align: center;
+    font-size: 25px;
+}
+
+.modal-header-text {font-weight: bold;
+    margin-top: 0;
+}
+
+.modal-content {
+    border: 1px solid gray;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.course-name-input {
+    border: 1px solid gray;
+    border-radius: 5px;
+    margin: auto;
+    margin-bottom: 10px;
+}
+
+.choose-course-language-text {
+    font-size: 20px;
+}
+
+.course-success-add-text {
+    color: green;
+}
+
+.empty-username-error-text {
+    color: red;
+}
+
+.modal-buttons {
+    margin-top: 20px;
+}
+
+.new-course-submit-button {
+    background-color: green;
+    color: white;
+    margin-right: 5px;
+}
+
+.new-course-cancel-button {
+    background-color: red;
+    color: white;
+    margin-left: 5px;
+}

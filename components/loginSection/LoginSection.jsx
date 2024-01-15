@@ -8,7 +8,7 @@ import Input from "@/generalComponents/inputComponents/generalInputComponent/Inp
 import Button from "@/generalComponents/button/Button.component";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { logIn, logOut } from "@/redux/features/authSlice";
+import { logIn } from "@/redux/features/authSlice";
 import { useDispatch } from "react-redux";
 
 const fetchUserDataFromFirestore = async () => {
@@ -43,7 +43,6 @@ const LoginSection = () => {
 
         userData.forEach((user) => {
             if (user.username === username && user.password === password) {
-                console.log(username);
                 dispatch(logIn(username));
 
                 if (user.role === "student") {

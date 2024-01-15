@@ -23,22 +23,33 @@ const Modal = ({ setIsModalOpen }) => {
     const { username } = useSelector((state) => state.auth.value);
     const [ isSuccessfullyAdded, setIsSuccessfullyAdded ] = useState(false);
     const [ courseNameError, setCourseNameError ] = useState(false);
+    const [ emptyUsernameError, setEmptyUsernameError ] = useState(false);
 
     const courseInfo = {
         courseName,
         languageType,
-        username
-    }
+        username,
+    };
 
     const onAddCourseFormSubmit = async (evt) => {
         evt.preventDefault();
+
+        const createdAtSeconds = new Date();
+        const createdAt = createdAtSeconds.getDate() + "/"
+                          + (createdAtSeconds.getMonth() + 1) + "/"
+                          + createdAtSeconds.getFullYear() + "  "
+                          + createdAtSeconds.getHours() + ":"
+                          + createdAtSeconds.getMinutes() + ":"
+                          + createdAtSeconds.getSeconds();
+        courseInfo.createdAt = createdAt;
 
         console.log("Course info: " + JSON.stringify(courseInfo));
 
         if (!courseName) {
             setCourseNameError(true);
-        }
-        else {
+        } else if (!username) {
+            setEmptyUsernameError(true);
+        } else {
             const added = await addCourseToFireStore(courseInfo);
 
             if (added) {
@@ -53,11 +64,12 @@ const Modal = ({ setIsModalOpen }) => {
         <div className="modal-container">
             <div className="modal">
                 <div className="modal-header">
-                    <P text="Add new course" className="modal-header-text" />
+                    <P text="New course" className="modal-header-text" />
                 </div>
                 <div className="modal-content">
                     <form onSubmit={onAddCourseFormSubmit}>
-                        <Input placeholder="Enter course name" 
+                        <Input placeholder="Enter course name"
+                               classNameDiv="course-name-input" 
                                onChangeHandler={(evt) => {
                                                         setCourseNameError(false);
                                                         setCourseName(evt.target.value);
@@ -67,7 +79,7 @@ const Modal = ({ setIsModalOpen }) => {
                             <P text="Course name can't be empty!" className="course-name-empty-error" />
                         }
 
-                        <label htmlFor="languages">Choose course language</label>
+                        <label htmlFor="languages" className="choose-course-language-text">Choose course language</label>
                         <select name="languages" 
                                 id="languages"
                                 defaultValue="js" 
@@ -81,10 +93,13 @@ const Modal = ({ setIsModalOpen }) => {
                         </select>
                         {isSuccessfullyAdded &&
                             <P text="Course successfully added!" className="course-success-add-text" />
-                        }                        
+                        }
+                        {emptyUsernameError &&
+                            <P text="Error with user! Please login again." className="empty-username-error-text" />
+                        }
                         <div className="modal-buttons">
-                            <Button type="submit" label="Submit" />
-                            <Button label="Cancel" onClickHandler={() => {setIsModalOpen(false)}} />
+                            <Button type="submit" label="Submit" className="new-course-submit-button" />
+                            <Button label="Cancel" className="new-course-cancel-button" onClickHandler={() => {setIsModalOpen(false)}} />
                         </div>
                     </form>                    
                 </div>                
