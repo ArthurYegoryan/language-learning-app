@@ -24,6 +24,7 @@ const TeacherCoursesPage = () => {
     useEffect(() => {
         const fetchCoursesData = async () => {
             const data = await fetchDataFromFirestore("courses");
+            data.map((course) => course.isSelected = false);
             console.log(JSON.stringify(data, null, 2));
             setCoursesData(data);
         }

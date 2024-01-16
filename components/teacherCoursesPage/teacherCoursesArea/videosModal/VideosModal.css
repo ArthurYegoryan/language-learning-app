@@ -1,0 +1,81 @@
+.modal, .overlay {
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: fixed;
+    /* overflow-y: scroll; */
+}
+
+.overlay {
+    background: rgba(49,49,49,0.8);
+}
+
+.modal-content {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    line-height: 1.4;
+    background: #f1f1f1;
+    padding: 14px 28px;
+    margin-top: 50px;
+    border-radius: 10px;
+    max-width: 600px;
+    min-width: 300px;
+    max-height: 800px;
+    overflow-y: scroll;
+}
+.modal-content::-webkit-scrollbar {
+    display: none;
+}
+
+.add-video-div {
+    border: 1px solid gray;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.video-info-div {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.video-name-input-div {
+    margin-right: 20px;
+    margin-left: 60px;
+}
+
+.video-name-input-div > input {
+    font-size: 14px;
+}
+
+.upload-video-button {
+    margin: auto;
+    background-color: green;
+    color: white;
+}
+
+.video-error-text {
+    color: red;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.video-upload-success-text {
+    color: green;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.modal-title-text {
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.close-modal-button {
+    background-color: red;
+    color: white;
+}

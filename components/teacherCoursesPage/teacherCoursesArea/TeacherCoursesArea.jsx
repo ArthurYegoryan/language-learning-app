@@ -1,8 +1,30 @@
 import Button from "@/generalComponents/button/Button.component";
 import "./TeacherCoursesArea.css";
 import P from "@/generalComponents/texts/P.component";
+import { useState } from "react";
+import VideosModal from "./videosModal/VideosModal";
 
 const TeacherCoursesArea = ({ coursesData }) => {
+    const [ videosModal, setVideosModal ] = useState(false);
+    const [ selectedCourse, setSelectedCourse ] = useState({});
+
+    const openCloseVideosModal = () => {
+        setVideosModal(!videosModal);
+    };
+
+    const onClickRelatedVideos = (id) => {
+        coursesData.map((course) => {
+            if (course.id === id) {
+                setSelectedCourse({
+                    ...course,
+                    isSelected: true
+                });
+                openCloseVideosModal();
+            }
+        });
+        console.log("onClickRelatedVideos");
+    };
+
     return (
         <div className="teacher-courses-area">
             <P text="My Courses" className="teacher-courses-header-text" />
@@ -19,12 +41,21 @@ const TeacherCoursesArea = ({ coursesData }) => {
                                     <P text={`Creation time: ` + course.createdAt} />
                                 </div>
                                 <div className="see-related-videos-div">
-                                    <Button label="See related videos" className="see-related-videos-button" />
+                                    <Button label="See related videos" 
+                                            className="see-related-videos-button" 
+                                            onClickHandler={() => {
+                                                console.log("Clicked course id: " + course.id);
+                                                onClickRelatedVideos(course.id);
+                                            }}
+                                    />
                                 </div>
                             </div>
                         </div>
                     );
                 })}
+                {videosModal &&
+                    <VideosModal course={selectedCourse} onRequestClose={openCloseVideosModal}/>
+                }
             </div>
         </div>
     );
