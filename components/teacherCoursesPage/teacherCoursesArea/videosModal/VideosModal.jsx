@@ -3,6 +3,7 @@ import { db } from "@/utils/firebaseConfig";
 import { collection, addDoc } from "firebase/firestore";
 import { storage } from "@/utils/firebaseConfig";
 import { ref, uploadBytesResumable } from "firebase/storage";
+import { v4 as uuid } from "uuid";
 import { useState } from "react";
 import Button from "@/generalComponents/button/Button.component";
 import P from "@/generalComponents/texts/P.component";
@@ -21,8 +22,8 @@ const addVideoInfoToFireStore = async (videoInfo) => {
     }
 }
 
-const addVideoToStorage = async (userid, video) => {
-    const fileRef = ref(storage, `videos/${userid}/${video.name}`);
+const addVideoToStorage = async (userid, video, videoStorageID) => {
+    const fileRef = ref(storage, `videos/${userid}/${videoStorageID}.mp4`);
     const uploadTask = uploadBytesResumable(fileRef, video);
     let isUploaded = true;
 
@@ -41,14 +42,18 @@ const addVideoToStorage = async (userid, video) => {
 
 const VideosModal = ({ course, onRequestClose }) => {
     const [ video, setVideo ] = useState("");
+    const [ videoStorageID, setVideoStorageID ] = useState("");
     const [ videoName, setVideoName ] = useState("");
+    const [ videoDescription, setVideoDescription ] = useState("");
     const [ videoEmptyError, setVideoEmptyError ] = useState(false);
     const [ videoNameEmptyError, setVideoNameEmptyError ] = useState(false);
     const [ isVideoUploaded, setIsVideoUploaded ] = useState(false);
     const [ videoUploadError, setVideoUploadError ] = useState(false);
     const { userid } = useSelector((state) => state.auth.value);
     const [ videoInfo, setVideoInfo ] = useState({
+                                            videoStorageID,
                                             videoName,
+                                            videoDescription,
                                             courseID: course.id,
                                             user: userid
                                         });
@@ -63,7 +68,15 @@ const VideosModal = ({ course, onRequestClose }) => {
             setVideoNameEmptyError(true);
         } else {
             console.log("Video uploading...");
-            const addedVideo = await addVideoToStorage(userid, video);
+
+            const videoUuid = uuid();
+            setVideoStorageID(videoUuid);
+            setVideoInfo({
+                ...videoInfo,
+                videoStorageID: videoUuid
+            });
+
+            const addedVideo = await addVideoToStorage(userid, video, videoStorageID);
             console.log("Result");
             console.log(JSON.stringify(addedVideo, null, 2));
 
@@ -108,7 +121,19 @@ const VideosModal = ({ course, onRequestClose }) => {
                                     setVideoEmptyError(false);
                                     setVideo(evt.target.files[0]);
                                }} />
-                    </div>                    
+                    </div>
+                    <div className="videos-description-div">
+                        <Input type="text" 
+                               placeholder="Enter video description" 
+                               classNameDiv="video-description-input-div" 
+                               onChangeHandler={(evt) => {
+                                   setVideoDescription(evt.target.value);
+                                   setVideoInfo({
+                                       ...videoInfo,
+                                       videoDescription
+                                   })
+                               }}/>
+                    </div>
                     <Button label="+ Upload new video" className="upload-video-button" onClickHandler={onClickUploadButton} />
                     {videoEmptyError &&
                         <P text="Video isn't choosen, please check!" className="video-error-text" />
@@ -126,6 +151,9 @@ const VideosModal = ({ course, onRequestClose }) => {
 
                 <div className="modal-title">
                     <P text={`${course.courseName} videos!`} className="modal-title-text" />
+                </div>
+                <div className="modal-videos-div">
+
                 </div>
                 
                 <p>{course.id}</p>

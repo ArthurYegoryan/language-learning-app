@@ -52,6 +52,15 @@
     font-size: 14px;
 }
 
+.video-description-input-div {
+    margin: auto;
+    margin-bottom: 10px;
+}
+
+.video-description-input-div > input {
+    font-size: 14px;
+}
+
 .upload-video-button {
     margin: auto;
     background-color: green;
