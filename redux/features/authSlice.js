@@ -4,8 +4,9 @@ const initialState = {
     value: {
         isAuth: false,
         username: "",
+        userid: "",
     }
-}
+};
 
 export const auth = createSlice({
     name: "auth",
@@ -15,6 +16,9 @@ export const auth = createSlice({
             return initialState;
         },
         logIn: (state, action) => {
+            console.log("Action payload:");
+            console.log(JSON.stringify(action.payload));
+
             return {
                 value: {
                     isAuth: true,
@@ -22,8 +26,19 @@ export const auth = createSlice({
                 },
             };
         },
+        logInUserid: (state, action) => {
+            console.log("Action payload:");
+            console.log(JSON.stringify(action.payload));
+
+            return {
+                value: {
+                    ...initialState.value,
+                    userid: action.payload
+                }
+            };
+        },
     },
 });
 
-export const { logIn, logOut } = auth.actions;
+export const { logIn, logInUserid, logOut } = auth.actions;
 export default auth.reducer;

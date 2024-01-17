@@ -8,7 +8,7 @@ import Input from "@/generalComponents/inputComponents/generalInputComponent/Inp
 import Button from "@/generalComponents/button/Button.component";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { logIn } from "@/redux/features/authSlice";
+import { logIn, logInUserid } from "@/redux/features/authSlice";
 import { useDispatch } from "react-redux";
 
 const fetchUserDataFromFirestore = async () => {
@@ -41,9 +41,14 @@ const LoginSection = () => {
     const checkLogin = (evt) => {
         evt.preventDefault();        
 
+        console.log("User data:");
+        console.log(JSON.stringify(userData, null, 2));
+
         userData.forEach((user) => {
             if (user.username === username && user.password === password) {
+                console.log(`User id: ${user.id}`);
                 dispatch(logIn(username));
+                dispatch(logInUserid(user.id));
 
                 if (user.role === "student") {
                     push("/student");

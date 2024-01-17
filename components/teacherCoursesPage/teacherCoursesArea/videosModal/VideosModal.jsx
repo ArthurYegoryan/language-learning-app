@@ -1,13 +1,15 @@
 import "./VideosModal.css";
 import { db } from "@/utils/firebaseConfig";
 import { collection, addDoc } from "firebase/firestore";
+import { storage } from "@/utils/firebaseConfig";
+import { ref, uploadBytesResumable } from "firebase/storage";
 import { useState } from "react";
 import Button from "@/generalComponents/button/Button.component";
 import P from "@/generalComponents/texts/P.component";
 import Input from "@/generalComponents/inputComponents/generalInputComponent/Input.component";
 import { useSelector } from "react-redux";
 
-const addVideoToFireStore = async (videoInfo) => {
+const addVideoInfoToFireStore = async (videoInfo) => {
     console.log(JSON.stringify(videoInfo, null, 2));
     try {
         const docRefVideo = await addDoc(collection(db, "teachersVideos"), videoInfo);
@@ -19,41 +21,69 @@ const addVideoToFireStore = async (videoInfo) => {
     }
 }
 
+const addVideoToStorage = async (userid, video) => {
+    const fileRef = ref(storage, `videos/${userid}/${video.name}`);
+    const uploadTask = uploadBytesResumable(fileRef, video);
+    let isUploaded = true;
+
+    uploadTask.on("state_changed", (snapshot) => {
+        let progress = (snapshot.bytesTransferred / snapshot.totalBytes * 100);
+        console.log(`Progress: ${progress}`);
+    }, (error) => {
+        console.error(error);
+        isUploaded = false;
+    }, () => {
+        console.log("Successfully uploaded!!");
+    });
+
+    return isUploaded;
+};
+
 const VideosModal = ({ course, onRequestClose }) => {
     const [ video, setVideo ] = useState("");
     const [ videoName, setVideoName ] = useState("");
     const [ videoEmptyError, setVideoEmptyError ] = useState(false);
     const [ videoNameEmptyError, setVideoNameEmptyError ] = useState(false);
     const [ isVideoUploaded, setIsVideoUploaded ] = useState(false);
-    const { username } = useSelector((state) => state.auth.value);
-
-    const videoInfo = {
-        videoName,
-        video,
-        courseID: course.id,
-        user: username
-    };
+    const [ videoUploadError, setVideoUploadError ] = useState(false);
+    const { userid } = useSelector((state) => state.auth.value);
+    const [ videoInfo, setVideoInfo ] = useState({
+                                            videoName,
+                                            courseID: course.id,
+                                            user: userid
+                                        });
     
 
     const onClickUploadButton = async (evt) => {
         evt.preventDefault();
-
-        console.log(video);
-        console.log("Video: " + JSON.stringify(video, null, 2));
-        console.log("Video info: " + JSON.stringify(videoInfo, null, 2));
 
         if (!video) {
             setVideoEmptyError(true);
         } else if (!videoName) {
             setVideoNameEmptyError(true);
         } else {
-            const added = await addVideoToFireStore(videoInfo);
+            console.log("Video uploading...");
+            const addedVideo = await addVideoToStorage(userid, video);
+            console.log("Result");
+            console.log(JSON.stringify(addedVideo, null, 2));
 
-            if (added) {
-                setVideo("");
-                setVideoName("");
-            }
-        }
+            setTimeout(async() => {
+                console.log("Result");
+                console.log(JSON.stringify(addedVideo, null, 2));
+
+                if (addedVideo) {
+                    const added = await addVideoInfoToFireStore(videoInfo);
+    
+                    if (added) {
+                        setVideo("");
+                        setVideoName("");
+                        setIsVideoUploaded(true);
+                    }
+                } else {
+                    setVideoUploadError(true);
+                }
+            }, 10000);
+        };
     }
 
     return (
@@ -68,6 +98,10 @@ const VideosModal = ({ course, onRequestClose }) => {
                                onChangeHandler={(evt) => {
                                     setVideoNameEmptyError(false);
                                     setVideoName(evt.target.value);
+                                    setVideoInfo({
+                                        ...videoInfo,
+                                        videoName
+                                    })
                                }} />
                         <input type="file" 
                                onChange={(evt) => {
@@ -84,6 +118,9 @@ const VideosModal = ({ course, onRequestClose }) => {
                     }
                     {isVideoUploaded &&
                         <P text="Video uploaded successfully!" className="video-upload-success-text" />
+                    }
+                    {videoUploadError &&
+                        <P text="Failed to upload video, please try again!" className="video-error-text" />
                     }
                 </div> 
 
