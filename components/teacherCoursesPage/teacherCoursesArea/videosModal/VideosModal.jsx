@@ -70,21 +70,14 @@ const VideosModal = ({ course, onRequestClose }) => {
             console.log("Video uploading...");
 
             const videoUuid = uuid();
-            console.log(videoUuid);
             setVideoStorageID(videoUuid);
-            setVideoInfo({
-                ...videoInfo,
-                videoStorageID: videoUuid
-            });
+            videoInfo.videoStorageID = videoUuid;
+            console.log("Video info:");
+            console.log(JSON.stringify(videoInfo, null, 2));
 
-            const addedVideo = await addVideoToStorage(userid, video, videoStorageID);
-            console.log("Result");
-            console.log(JSON.stringify(addedVideo, null, 2));
-
-            setTimeout(async() => {
-                console.log("Result");
-                console.log(JSON.stringify(addedVideo, null, 2));
-
+            const addedVideo = await addVideoToStorage(userid, video, videoUuid);
+            
+            setTimeout(async () => {
                 if (addedVideo) {
                     const added = await addVideoInfoToFireStore(videoInfo);
     
