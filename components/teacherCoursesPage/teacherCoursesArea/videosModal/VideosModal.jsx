@@ -1,46 +1,19 @@
 import "./VideosModal.css";
-import { db } from "@/utils/firebaseConfig";
-import { collection, addDoc } from "firebase/firestore";
-import { storage } from "@/utils/firebaseConfig";
-import { ref, uploadBytesResumable } from "firebase/storage";
+import { addVideoInfoToFireStore } from "@/services/api/addVideoInfoToFireStore";
+import { addVideoToStorage } from "@/services/api/addVideoToStorage";
+import { fetchDataFromFirestore } from "@/services/api/fetchDataFromFirestore";
 import { v4 as uuid } from "uuid";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "@/generalComponents/button/Button.component";
 import P from "@/generalComponents/texts/P.component";
 import Input from "@/generalComponents/inputComponents/generalInputComponent/Input.component";
 import { useSelector } from "react-redux";
 
-const addVideoInfoToFireStore = async (videoInfo) => {
-    console.log(JSON.stringify(videoInfo, null, 2));
-    try {
-        const docRefVideo = await addDoc(collection(db, "teachersVideos"), videoInfo);
-        console.log("Video add with id: " + docRefVideo);
-        return true;
-    } catch (err) {
-        console.error("Error adding document ", err);
-        return  false;
-    }
-}
-
-const addVideoToStorage = async (userid, video, videoStorageID) => {
-    const fileRef = ref(storage, `videos/${userid}/${videoStorageID}.mp4`);
-    const uploadTask = uploadBytesResumable(fileRef, video);
-    let isUploaded = true;
-
-    uploadTask.on("state_changed", (snapshot) => {
-        let progress = (snapshot.bytesTransferred / snapshot.totalBytes * 100);
-        console.log(`Progress: ${progress}`);
-    }, (error) => {
-        console.error(error);
-        isUploaded = false;
-    }, () => {
-        console.log("Successfully uploaded!!");
-    });
-
-    return isUploaded;
-};
-
 const VideosModal = ({ course, onRequestClose }) => {
+    const [ videosData, setVideosData ] = useState()
+    const [ isModalVideoDataImageHovered, setIsModalVideoDataImageHovered ] = useState(false);
+    const [ hoveredVideoData, setHoveredVideoData ] = useState({});
+
     const [ video, setVideo ] = useState("");
     const [ videoStorageID, setVideoStorageID ] = useState("");
     const [ videoName, setVideoName ] = useState("");
@@ -83,7 +56,9 @@ const VideosModal = ({ course, onRequestClose }) => {
     
                     if (added) {
                         setVideo("");
+                        setVideoStorageID("");
                         setVideoName("");
+                        setVideoDescription("");
                         setIsVideoUploaded(true);
                     }
                 } else {
@@ -92,6 +67,33 @@ const VideosModal = ({ course, onRequestClose }) => {
             }, 10000);
         };
     }
+
+    useEffect(() => {
+        const fetchVideosData = async () => {
+            const data = await fetchDataFromFirestore("teachersVideos");
+            data.map((videoData) => videoData.isHovered = false)
+            console.log("Videos data:");
+            console.log(JSON.stringify(data, null, 2));
+            setVideosData(data);
+        }
+        fetchVideosData();
+    }, []);
+
+    const onMouseOverHandler = (videoData) => {
+        videosData.map((data) => {
+            if (data.id === videoData.id) {
+                videoData.isHovered = true;
+                setIsModalVideoDataImageHovered(true);
+            }
+        });
+    };
+
+    const onMouseOutHandler = () => {
+        videosData.map((data) => {
+            data.isHovered = false;
+        });
+        setIsModalVideoDataImageHovered(false);
+    };
 
     return (
         <div className="modal">
@@ -147,12 +149,36 @@ const VideosModal = ({ course, onRequestClose }) => {
                     <P text={`${course.courseName} videos!`} className="modal-title-text" />
                 </div>
                 <div className="modal-videos-div">
-
+                    {videosData &&
+                        videosData.map((videoData) => {
+                            return (
+                                <div className="modal-video-data" key={videoData.id}>
+                                    <div className="modal-video-data-image"
+                                        onMouseOver={() => {
+                                            onMouseOverHandler(videoData);
+                                        }}
+                                        onMouseOut={() => {
+                                            onMouseOutHandler()
+                                        }}
+                                    >
+                                        {videoData.isHovered && isModalVideoDataImageHovered &&
+                                            <img src="static/images/download.svg" alt="download" />
+                                        }
+                                        {!videoData.isHovered &&
+                                            <img src={`static/images/${course.languageType}.svg`} alt="video" />
+                                        }
+                                    </div>
+                                    <div className="modal-video-data-name-description">
+                                        <P text={videoData.videoName} className="modal-video-data-name" />
+                                        <p>{"("}</p>
+                                        <P text={videoData.videoDescription} className="modal-video-data-description" />
+                                        <p>{")"}</p>
+                                    </div>
+                                </div>
+                            )
+                        })
+                    }
                 </div>
-                
-                <p>{course.id}</p>
-                {console.log("Courses data: " + JSON.stringify(course, null, 2))}
-                {console.log("Course ID: " + course.id)}
                 <Button label="Close" className="close-modal-button" onClickHandler={onRequestClose} />
             </div>            
         </div>

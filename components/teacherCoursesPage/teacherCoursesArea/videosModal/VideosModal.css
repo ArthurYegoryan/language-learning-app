@@ -88,3 +88,35 @@
     background-color: red;
     color: white;
 }
+
+.modal-video-data {
+    display: flex;
+    border: 1px solid gray;
+    border-radius: 10px;
+    margin-bottom: 5px;
+}
+
+.modal-video-data-image {
+    margin: 5px;
+    margin-right: 10px;
+    width: 40px;
+    border: 1px solid gray;
+    border-radius: 10px;
+}
+
+.modal-video-data-image:hover {
+    cursor: pointer;
+}
+
+.modal-video-data-image > img {
+    width: 100%;
+}
+
+.modal-video-data-name-description {
+    display: flex;
+}
+
+.modal-video-data-name {
+    margin-right: 10px;
+    font-weight: bold;
+}
