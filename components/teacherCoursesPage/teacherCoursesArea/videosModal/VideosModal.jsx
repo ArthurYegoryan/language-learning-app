@@ -70,6 +70,7 @@ const VideosModal = ({ course, onRequestClose }) => {
             console.log("Video uploading...");
 
             const videoUuid = uuid();
+            console.log(videoUuid);
             setVideoStorageID(videoUuid);
             setVideoInfo({
                 ...videoInfo,

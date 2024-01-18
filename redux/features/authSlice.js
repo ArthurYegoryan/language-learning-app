@@ -21,6 +21,7 @@ export const auth = createSlice({
 
             return {
                 value: {
+                    ...state.value,
                     isAuth: true,
                     username: action.payload,
                 },
@@ -32,7 +33,7 @@ export const auth = createSlice({
 
             return {
                 value: {
-                    ...initialState.value,
+                    ...state.value,
                     userid: action.payload
                 }
             };
