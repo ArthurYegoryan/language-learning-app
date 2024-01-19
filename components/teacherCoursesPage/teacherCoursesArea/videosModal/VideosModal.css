@@ -89,11 +89,14 @@
     color: white;
 }
 
-.modal-video-data {
-    display: flex;
+.modal-video-container {
     border: 1px solid gray;
     border-radius: 10px;
     margin-bottom: 5px;
+}
+
+.modal-video-data {
+    display: flex;
 }
 
 .modal-video-data-image {
@@ -106,6 +109,7 @@
 
 .modal-video-data-image:hover {
     cursor: pointer;
+    background-color: green;
 }
 
 .modal-video-data-image > img {
@@ -119,4 +123,19 @@
 .modal-video-data-name {
     margin-right: 10px;
     font-weight: bold;
+}
+
+.video-download-error-text {
+    text-align: start;
+    color: red;
+    margin-top: 0;
+    margin-left: 5px;
+    margin-bottom: 0;
+    font-size: 14px;
+}
+
+.video-download-manually-link {
+    text-align: start;
+    color: blue;
+    font-size: 12px;
 }

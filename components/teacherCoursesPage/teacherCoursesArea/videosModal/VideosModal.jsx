@@ -2,6 +2,7 @@ import "./VideosModal.css";
 import { addVideoInfoToFireStore } from "@/services/api/addVideoInfoToFireStore";
 import { addVideoToStorage } from "@/services/api/addVideoToStorage";
 import { fetchDataFromFirestore } from "@/services/api/fetchDataFromFirestore";
+import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import { v4 as uuid } from "uuid";
 import { useEffect, useState } from "react";
 import Button from "@/generalComponents/button/Button.component";
@@ -12,7 +13,9 @@ import { useSelector } from "react-redux";
 const VideosModal = ({ course, onRequestClose }) => {
     const [ videosData, setVideosData ] = useState()
     const [ isModalVideoDataImageHovered, setIsModalVideoDataImageHovered ] = useState(false);
-    const [ hoveredVideoData, setHoveredVideoData ] = useState({});
+    const [ showVideoURL, setShowVideoURL ] = useState(false);
+    const [ videoUrl, setVideoUrl ] = useState("");
+    const [ videoUrlsForManuallyDownload, setVideoUrlsForManuallyDownload ] = useState({});
 
     const [ video, setVideo ] = useState("");
     const [ videoStorageID, setVideoStorageID ] = useState("");
@@ -71,7 +74,10 @@ const VideosModal = ({ course, onRequestClose }) => {
     useEffect(() => {
         const fetchVideosData = async () => {
             const data = await fetchDataFromFirestore("teachersVideos");
-            data.map((videoData) => videoData.isHovered = false)
+            data.map((videoData) => {
+                videoData.isHovered = false
+                videoData.isClicked = false
+            });
             console.log("Videos data:");
             console.log(JSON.stringify(data, null, 2));
             setVideosData(data);
@@ -93,6 +99,33 @@ const VideosModal = ({ course, onRequestClose }) => {
             data.isHovered = false;
         });
         setIsModalVideoDataImageHovered(false);
+    };
+
+    const downloadVideoFromStorage = async (userid, videoid) => {
+        const storage = getStorage();
+        const videoRef = ref(storage, `videos/${userid}/${videoid}.mp4`);
+        console.log(`Storage: ${JSON.stringify(storage, null, 2)}`);
+        console.log(`Video ref: ${videoRef}`);
+        console.log(`Video path: videos/${userid}/${videoid}.mp4`);
+        
+        return await getDownloadURL(videoRef)
+            .then((url) => {
+                console.log(`URL: ${url}`);
+                setVideoUrl(url);
+            })
+            .catch((error) => {
+                console.error("Occured error, please try again!");
+            });
+    };
+
+    const onClickVideoImageHandler = async (userid, videoData) => {
+        await downloadVideoFromStorage(userid, videoData.videoStorageID);
+        videosData.map((data) => {
+            if (data.id === videoData.id) {
+                videoData.isClicked = true;
+                setShowVideoURL(true);
+            }
+        });        
     };
 
     return (
@@ -152,28 +185,53 @@ const VideosModal = ({ course, onRequestClose }) => {
                     {videosData &&
                         videosData.map((videoData) => {
                             return (
-                                <div className="modal-video-data" key={videoData.id}>
-                                    <div className="modal-video-data-image"
-                                        onMouseOver={() => {
-                                            onMouseOverHandler(videoData);
-                                        }}
-                                        onMouseOut={() => {
-                                            onMouseOutHandler()
-                                        }}
-                                    >
-                                        {videoData.isHovered && isModalVideoDataImageHovered &&
-                                            <img src="static/images/download.svg" alt="download" />
-                                        }
-                                        {!videoData.isHovered &&
-                                            <img src={`static/images/${course.languageType}.svg`} alt="video" />
-                                        }
+                                <div className="modal-video-container" key={videoData.id}>
+                                    <div className="modal-video-data">
+                                        <a 
+                                            href={videoUrl}
+                                            download={videoData.videoName}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                        >
+                                            <div className="modal-video-data-image"
+                                                onMouseOver={() => {
+                                                    onMouseOverHandler(videoData);
+                                                }}
+                                                onMouseOut={() => {
+                                                    onMouseOutHandler();
+                                                }}
+                                                onClick={() => {
+                                                    onClickVideoImageHandler(userid, videoData);
+                                                }}
+                                            >
+                                                {videoData.isHovered && isModalVideoDataImageHovered &&
+                                                    <img src="static/images/download.svg" alt="download" />
+                                                }
+                                                {!videoData.isHovered &&
+                                                    <img src={`static/images/${course.languageType}.svg`} alt="video" />
+                                                }
+                                            </div>
+                                        </a>
+                                        <div className="modal-video-data-name-description">
+                                            <P text={videoData.videoName} className="modal-video-data-name" />
+                                            <p>{"("}</p>
+                                            <P text={videoData.videoDescription} className="modal-video-data-description" />
+                                            <p>{")"}</p>
+                                        </div>
                                     </div>
-                                    <div className="modal-video-data-name-description">
-                                        <P text={videoData.videoName} className="modal-video-data-name" />
-                                        <p>{"("}</p>
-                                        <P text={videoData.videoDescription} className="modal-video-data-description" />
-                                        <p>{")"}</p>
-                                    </div>
+                                    {videoData.isClicked && showVideoURL &&
+                                        <>
+                                            <P text="If there is a problem with download, here is video link, you can download manually:"
+                                               className="video-download-error-text" />
+                                               {console.log(`Video url: ${JSON.stringify(videoUrl)}`)}
+                                            <a href={videoUrl}
+                                               target="_blank"
+                                               className="video-download-manually-link"
+                                            >
+                                                Video download link
+                                            </a>
+                                        </>
+                                    }
                                 </div>
                             )
                         })
