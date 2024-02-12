@@ -1,4 +1,4 @@
-.modal, .overlay {
+.t-videos-modal, .t-videos-overlay {
     width: 100vw;
     height: 100vh;
     top: 0;
@@ -9,11 +9,11 @@
     /* overflow-y: scroll; */
 }
 
-.overlay {
+.t-videos-overlay {
     background: rgba(49,49,49,0.8);
 }
 
-.modal-content {
+.t-videos-modal-content {
     position: absolute;
     top: 40%;
     left: 50%;
@@ -28,63 +28,63 @@
     max-height: 800px;
     overflow-y: scroll;
 }
-.modal-content::-webkit-scrollbar {
+.t-videos-modal-content::-webkit-scrollbar {
     display: none;
 }
 
-.add-video-div {
+.t-add-video-div {
     border: 1px solid gray;
     border-radius: 10px;
     padding: 10px;
 }
 
-.video-info-div {
+.t-video-info-div {
     display: flex;
     margin-bottom: 10px;
 }
 
-.video-name-input-div {
+.t-video-name-input-div {
     margin-right: 20px;
     margin-left: 60px;
 }
 
-.video-name-input-div > input {
+.t-video-name-input-div > input {
     font-size: 14px;
 }
 
-.video-description-input-div {
+.t-video-description-input-div {
     margin: auto;
     margin-bottom: 10px;
 }
 
-.video-description-input-div > input {
+.t-video-description-input-div > input {
     font-size: 14px;
 }
 
-.upload-video-button {
+.t-upload-video-button {
     margin: auto;
     background-color: green;
     color: white;
 }
 
-.video-error-text {
+.t-video-error-text {
     color: red;
     margin-top: 0;
     margin-bottom: 0;
 }
 
-.video-upload-success-text {
+.t-video-upload-success-text {
     color: green;
     margin-top: 0;
     margin-bottom: 0;
 }
 
-.modal-title-text {
+.t-modal-title-text {
     font-size: 25px;
     font-weight: bold;
 }
 
-.close-modal-button {
+.t-close-modal-button {
     background-color: red;
     color: white;
 }

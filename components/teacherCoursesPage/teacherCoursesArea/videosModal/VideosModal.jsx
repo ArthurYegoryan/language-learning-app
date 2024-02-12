@@ -129,14 +129,14 @@ const VideosModal = ({ course, onRequestClose }) => {
     };
 
     return (
-        <div className="modal">
-            <div onClick={onRequestClose} className="overlay"></div>
-            <div className="modal-content">
-                <div className="add-video-div">
-                    <div className="video-info-div">
+        <div className="t-videos-modal">
+            <div onClick={onRequestClose} className="t-videos-overlay"></div>
+            <div className="t-videos-modal-content">
+                <div className="t-add-video-div">
+                    <div className="t-video-info-div">
                         <Input type="text" 
                                placeholder="Enter video name" 
-                               classNameDiv="video-name-input-div" 
+                               classNameDiv="t-video-name-input-div" 
                                onChangeHandler={(evt) => {
                                     setVideoNameEmptyError(false);
                                     setVideoName(evt.target.value);
@@ -151,10 +151,10 @@ const VideosModal = ({ course, onRequestClose }) => {
                                     setVideo(evt.target.files[0]);
                                }} />
                     </div>
-                    <div className="videos-description-div">
+                    <div className="t-videos-description-div">
                         <Input type="text" 
                                placeholder="Enter video description" 
-                               classNameDiv="video-description-input-div" 
+                               classNameDiv="t-video-description-input-div" 
                                onChangeHandler={(evt) => {
                                    setVideoDescription(evt.target.value);
                                    setVideoInfo({
@@ -163,23 +163,23 @@ const VideosModal = ({ course, onRequestClose }) => {
                                    })
                                }}/>
                     </div>
-                    <Button label="+ Upload new video" className="upload-video-button" onClickHandler={onClickUploadButton} />
+                    <Button label="+ Upload new video" className="t-upload-video-button" onClickHandler={onClickUploadButton} />
                     {videoEmptyError &&
-                        <P text="Video isn't choosen, please check!" className="video-error-text" />
+                        <P text="Video isn't choosen, please check!" className="t-video-error-text" />
                     }
                     {videoNameEmptyError &&
-                        <P text="Video name can't be empty!" className="video-error-text" />
+                        <P text="Video name can't be empty!" className="t-video-error-text" />
                     }
                     {isVideoUploaded &&
-                        <P text="Video uploaded successfully!" className="video-upload-success-text" />
+                        <P text="Video uploaded successfully!" className="t-video-upload-success-text" />
                     }
                     {videoUploadError &&
-                        <P text="Failed to upload video, please try again!" className="video-error-text" />
+                        <P text="Failed to upload video, please try again!" className="t-video-error-text" />
                     }
                 </div> 
 
                 <div className="modal-title">
-                    <P text={`${course.courseName} videos!`} className="modal-title-text" />
+                    <P text={`${course.courseName} videos!`} className="t-modal-title-text" />
                 </div>
                 <div className="modal-videos-div">
                     {videosData &&
@@ -237,7 +237,7 @@ const VideosModal = ({ course, onRequestClose }) => {
                         })
                     }
                 </div>
-                <Button label="Close" className="close-modal-button" onClickHandler={onRequestClose} />
+                <Button label="Close" className="t-close-modal-button" onClickHandler={onRequestClose} />
             </div>            
         </div>
     );
