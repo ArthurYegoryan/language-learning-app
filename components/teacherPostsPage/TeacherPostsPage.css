@@ -1,8 +1,8 @@
-.teacher-courses-section {
+.teacher-posts-section {
     padding: 10px;
 }
 
-.add-new-course-div {
+.add-new-post-div {
     display: flex;
     justify-content: space-between;
 }
@@ -18,7 +18,7 @@
     width: 100%;
 }
 
-.add-new-course-button {
+.add-new-post-button {
     position: relative;
     background-color: green;
     color: white;

@@ -1,7 +1,9 @@
+import TeacherPostsPage from "@/components/teacherPostsPage/TeacherPostsPage";
+
 const Posts = () => {
     return (
         <div>
-            <h1>Posts</h1>
+            <TeacherPostsPage />
         </div>
     );
 };
