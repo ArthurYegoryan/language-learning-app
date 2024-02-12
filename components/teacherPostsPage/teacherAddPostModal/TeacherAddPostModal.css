@@ -12,6 +12,7 @@
     border: 1px solid gray;
     padding: 10px;
     border-radius: 10px;
+    background-color: blue;
 }
 
 .t-add-post-modal-header {
@@ -19,26 +20,33 @@
     font-size: 25px;
 }
 
-.t-add-post-modal-header-text {font-weight: bold;
+.t-add-post-modal-header-text {
+    font-weight: bold;
     margin-top: 0;
+    color: white;
 }
 
 .t-add-post-modal-content {
-    border: 1px solid gray;
+    border: 1px solid white;
     padding: 10px;
     border-radius: 10px;
     text-align: center;
 }
 
 .t-add-post-name-input {
-    border: 1px solid gray;
+    border: 1px solid white;
     border-radius: 5px;
     margin: auto;
     margin-bottom: 10px;
 }
 
+.t-add-post-text-input {
+    border: 1px solid white;
+    border-radius: 5px;
+}
+
 .t-add-post-success-add-text {
-    color: green;
+    color: yellowgreen;
 }
 
 .empty-username-error-text,

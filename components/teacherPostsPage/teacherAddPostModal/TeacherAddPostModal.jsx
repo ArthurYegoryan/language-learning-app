@@ -8,7 +8,7 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import { addPostToFireStore } from "@/services/api/addPostToFireStore";
 
-const TeacherAddPostModal = ({ setIsModalOpen }) => {
+const TeacherAddPostModal = ({ setIsModalOpen, setIsPostsChanged }) => {
     const [ postName, setPostName ] = useState("");
     const [ postNameError, setPostNameError ] = useState(false);
     const [ postText, setPostText ] = useState("");
@@ -50,6 +50,7 @@ const TeacherAddPostModal = ({ setIsModalOpen }) => {
                 setPostName("");
                 setPostText("");
                 setIsSuccessfullyAdded(true);
+                setIsPostsChanged(true);
             }
         }
     }
@@ -77,6 +78,7 @@ const TeacherAddPostModal = ({ setIsModalOpen }) => {
                                   rows="5" 
                                   cols="25"
                                   placeholder="Enter post text..."
+                                  className="t-add-post-text-input"
                                   onChange={(evt) => {
                                     setPostTextError(false);
                                     setPostText(evt.target.value);

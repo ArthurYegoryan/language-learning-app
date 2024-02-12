@@ -14,6 +14,7 @@ const TeacherPostsPage = () => {
     const [ isModalOpen, setIsModalOpen ] = useState(false);
     const [ postsData, setPostsData ] = useState([]);
     const [ emptyDataText, setEmptyDataText ] = useState(false);
+    const [ isPostsChanged, setIsPosChanged ] = useState(false);
     const { userid } = useSelector((state) => state.auth.value)
     const { push } = useRouter();
 
@@ -39,7 +40,7 @@ const TeacherPostsPage = () => {
             setPostsData(teacherPosts);
         }
         fetchPostsData();
-    }, []);
+    }, [isPostsChanged]);
 
     return (
         <section className="teacher-posts-section">
@@ -49,7 +50,7 @@ const TeacherPostsPage = () => {
                 </button>
                 <Button label="+ Add new post" className="add-new-post-button" onClickHandler={onClickAddCourse} />
                 {isModalOpen &&
-                    <TeacherAddPostModal setIsModalOpen={setIsModalOpen} />
+                    <TeacherAddPostModal setIsModalOpen={setIsModalOpen} setIsPostsChanged={setIsPosChanged} />
                 }
             </div>            
             <TeachersPostsArea postsData={postsData} />
