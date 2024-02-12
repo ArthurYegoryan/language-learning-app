@@ -5,9 +5,12 @@ import TeacherAddPostModal from "./teacherAddPostModal/TeacherAddPostModal";
 import Button from "@/generalComponents/button/Button.component";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import TeachersPostsArea from "./teacherPostsArea/TeacherPostsArea";
+import { fetchDataFromFirestore } from "@/services/api/fetchDataFromFirestore";
 
 const TeacherPostsPage = () => {
     const [ isModalOpen, setIsModalOpen ] = useState(false);
+    const [ postsData, setPostsData ] = useState([]);
     const { push } = useRouter();
 
     const onClickHome = () => {
@@ -17,6 +20,16 @@ const TeacherPostsPage = () => {
     const onClickAddCourse = () => {
         setIsModalOpen(!isModalOpen);
     }
+
+    useEffect(() => {
+        const fetchPostsData = async () => {
+            const data = await fetchDataFromFirestore("posts");
+            data.map((post) => post.isSelected = false);
+            console.log(JSON.stringify(data, null, 2));
+            setPostsData(data);
+        }
+        fetchPostsData();
+    }, []);
 
     return (
         <section className="teacher-posts-section">
@@ -29,6 +42,7 @@ const TeacherPostsPage = () => {
                     <TeacherAddPostModal setIsModalOpen={setIsModalOpen} />
                 }
             </div>
+            <TeachersPostsArea postsData={postsData} />
         </section>
     );
 };
