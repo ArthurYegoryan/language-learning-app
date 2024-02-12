@@ -1,26 +1,15 @@
-import "./Modal.css";
+import "./TeacherAddCourseModal.css";
 import P from "@/generalComponents/texts/P.component";
 import Button from "@/generalComponents/button/Button.component";
 import Input from "@/generalComponents/inputComponents/generalInputComponent/Input.component";
-import { db } from "@/utils/firebaseConfig";
-import { collection, addDoc } from "firebase/firestore";
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import { addCourseToFireStore } from "@/services/api/addCourseToFireStore";
 
-const addCourseToFireStore = async (courseInfo) => {
-    try {
-        const docRef = await addDoc(collection(db, "courses"), courseInfo);
-        return true;
-    } catch (err) {
-        console.error("Error adding document ", err);
-        return  false;
-    }
-}
-
-const Modal = ({ setIsModalOpen }) => {
+const TeacherAddCourseModal = ({ setIsModalOpen, isCoursesChanged, setIsCoursesChanged }) => {
     const [ courseName, setCourseName ] = useState("");
     const [ languageType, setLanguageType ] = useState("js");
-    const { username } = useSelector((state) => state.auth.value);
+    const { userid } = useSelector((state) => state.auth.value);
     const [ isSuccessfullyAdded, setIsSuccessfullyAdded ] = useState(false);
     const [ courseNameError, setCourseNameError ] = useState(false);
     const [ emptyUsernameError, setEmptyUsernameError ] = useState(false);
@@ -28,7 +17,7 @@ const Modal = ({ setIsModalOpen }) => {
     const courseInfo = {
         courseName,
         languageType,
-        username,
+        userid,
     };
 
     const onAddCourseFormSubmit = async (evt) => {
@@ -47,7 +36,7 @@ const Modal = ({ setIsModalOpen }) => {
 
         if (!courseName) {
             setCourseNameError(true);
-        } else if (!username) {
+        } else if (!userid) {
             setEmptyUsernameError(true);
         } else {
             const added = await addCourseToFireStore(courseInfo);
@@ -56,6 +45,7 @@ const Modal = ({ setIsModalOpen }) => {
                 setCourseName("");
                 setLanguageType("js");
                 setIsSuccessfullyAdded(true);
+                setIsCoursesChanged(!isCoursesChanged);
             }
         }        
     }
@@ -108,4 +98,4 @@ const Modal = ({ setIsModalOpen }) => {
     );
 };
 
-export default Modal;
+export default TeacherAddCourseModal;

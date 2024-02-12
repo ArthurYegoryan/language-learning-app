@@ -12,6 +12,7 @@
     border: 1px solid gray;
     padding: 10px;
     border-radius: 10px;
+    background-color: blue;
 }
 
 .modal-header {
@@ -19,19 +20,21 @@
     font-size: 25px;
 }
 
-.modal-header-text {font-weight: bold;
+.modal-header-text {
+    font-weight: bold;
     margin-top: 0;
+    color: white;
 }
 
 .modal-content {
-    border: 1px solid gray;
+    border: 1px solid white;
     padding: 10px;
     border-radius: 10px;
     text-align: center;
 }
 
 .course-name-input {
-    border: 1px solid gray;
+    border: 1px white;
     border-radius: 5px;
     margin: auto;
     margin-bottom: 10px;
@@ -39,10 +42,11 @@
 
 .choose-course-language-text {
     font-size: 20px;
+    color: aqua;
 }
 
 .course-success-add-text {
-    color: green;
+    color: yellowgreen;
 }
 
 .empty-username-error-text {

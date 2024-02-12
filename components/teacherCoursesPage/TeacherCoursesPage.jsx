@@ -2,7 +2,7 @@
 
 import "./TeacherCoursesPage.css";
 import Button from "@/generalComponents/button/Button.component";
-import Modal from "@/components/modal/Modal";
+import TeacherAddCourseModal from "@/components/teacherCoursesPage/teacherAddCourseModal/TeacherAddCourseModal";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { fetchDataFromFirestore } from "@/services/api/fetchDataFromFirestore";
@@ -10,6 +10,7 @@ import TeacherCoursesArea from "./teacherCoursesArea/TeacherCoursesArea";
 
 const TeacherCoursesPage = () => {
     const [ isModalOpen, setIsModalOpen ] = useState(false);
+    const [ isCoursesChanged, setIsCoursesChanged ] = useState(false);
     const [ coursesData, setCoursesData ] = useState([]);
     const { push } = useRouter();
 
@@ -29,7 +30,7 @@ const TeacherCoursesPage = () => {
             setCoursesData(data);
         }
         fetchCoursesData();
-    }, []);
+    }, [isCoursesChanged]);
 
     return (
         <section className="teacher-courses-section">
@@ -39,7 +40,10 @@ const TeacherCoursesPage = () => {
                 </button>
                 <Button label="+ Add new course" className="add-new-course-button" onClickHandler={onClickAddCourse} />
                 {isModalOpen &&
-                    <Modal setIsModalOpen={setIsModalOpen} />
+                    <TeacherAddCourseModal setIsModalOpen={setIsModalOpen} 
+                                           isCoursesChanged={isCoursesChanged} 
+                                           setIsCoursesChanged={setIsCoursesChanged}
+                    />
                 }
             </div>
             <TeacherCoursesArea coursesData={coursesData} />

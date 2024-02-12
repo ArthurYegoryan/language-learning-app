@@ -34,7 +34,11 @@ const TeacherCoursesArea = ({ coursesData }) => {
                             <P text={course.courseName} className="teacher-course-card-coursename" />
                             <div className="teacher-course-card-image-info">
                                 <div className="teacher-course-card-image">
-                                    <img src={`static/images/${course.languageType}.svg`} alt={`${course.languageType}`} />
+                                    <img src={course.languageType === "c#" ? `static/images/c_sharp.svg` : 
+                                              course.languageType === "c++" ? `static/images/c_plus.svg` :
+                                              `static/images/${course.languageType}.svg` 
+                                             } 
+                                         alt={`${course.languageType}`} />
                                 </div>
                                 <div className="teacher-course-card-info">
                                     <P text={`Creation time: ` + course.createdAt} />
