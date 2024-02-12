@@ -55,25 +55,25 @@ const TeacherAddPostModal = ({ setIsModalOpen }) => {
     }
 
     return (
-        <div className="t-post-modal-container">
-            <div className="t-post-modal">
-                <div className="t-post-modal-header">
-                    <P text="New post" className="t-post-modal-header-text" />
+        <div className="t-add-post-modal-container">
+            <div className="t-add-post-modal">
+                <div className="t-add-post-modal-header">
+                    <P text="New post" className="t-add-post-modal-header-text" />
                 </div>
-                <div className="t-post-modal-content">
+                <div className="t-add-post-modal-content">
                     <form onSubmit={onAddCourseFormSubmit}>
                         <Input placeholder="Enter post name"
-                               classNameDiv="t-post-name-input" 
+                               classNameDiv="t-add-post-name-input" 
                                onChangeHandler={(evt) => {
                                                         setPostNameError(false);
                                                         setPostName(evt.target.value);
                                                     }} 
                         />
                         {postNameError &&
-                            <P text="Post name can't be empty!" className="t-post-name-empty-error" />
+                            <P text="Post name can't be empty!" className="t-add-post-name-empty-error" />
                         }
 
-                        <textarea name="t-post-text" 
+                        <textarea name="t-add-post-text" 
                                   rows="5" 
                                   cols="25"
                                   placeholder="Enter post text..."
@@ -84,15 +84,15 @@ const TeacherAddPostModal = ({ setIsModalOpen }) => {
                         >
                         </textarea>
                         {isSuccessfullyAdded &&
-                            <P text="Post successfully added!" className="t-post-success-add-text" />
+                            <P text="Post successfully added!" className="t-add-post-success-add-text" />
                         }
                         {postTextError &&
-                            <P text="Post text can't be empty!" className="t-post-name-empty-error" />
+                            <P text="Post text can't be empty!" className="t-add-post-name-empty-error" />
                         }
                         {emptyUseridError &&
                             <P text="Error with user! Please login again." className="empty-username-error-text" />
                         } 
-                        <div className="t-post-modal-buttons">
+                        <div className="t-add-post-modal-buttons">
                             <Button type="submit" label="Submit" className="t-new-post-submit-button" />
                             <Button label="Cancel" className="t-new-post-cancel-button" onClickHandler={() => {setIsModalOpen(false)}} />
                         </div>

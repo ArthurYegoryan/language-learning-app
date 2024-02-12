@@ -7,10 +7,14 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import TeachersPostsArea from "./teacherPostsArea/TeacherPostsArea";
 import { fetchDataFromFirestore } from "@/services/api/fetchDataFromFirestore";
+import { useSelector } from "react-redux";
+import P from "@/generalComponents/texts/P.component";
 
 const TeacherPostsPage = () => {
     const [ isModalOpen, setIsModalOpen ] = useState(false);
     const [ postsData, setPostsData ] = useState([]);
+    const [ emptyDataText, setEmptyDataText ] = useState(false);
+    const { userid } = useSelector((state) => state.auth.value)
     const { push } = useRouter();
 
     const onClickHome = () => {
@@ -24,9 +28,15 @@ const TeacherPostsPage = () => {
     useEffect(() => {
         const fetchPostsData = async () => {
             const data = await fetchDataFromFirestore("posts");
-            data.map((post) => post.isSelected = false);
-            console.log(JSON.stringify(data, null, 2));
-            setPostsData(data);
+            const teacherPosts = data.filter((post) => post.userid === userid);
+
+            if (!teacherPosts.length) {
+                setEmptyDataText(true);
+            }
+
+            teacherPosts.map((post) => post.isSelected = false);
+            console.log(JSON.stringify(teacherPosts, null, 2));
+            setPostsData(teacherPosts);
         }
         fetchPostsData();
     }, []);
@@ -41,8 +51,13 @@ const TeacherPostsPage = () => {
                 {isModalOpen &&
                     <TeacherAddPostModal setIsModalOpen={setIsModalOpen} />
                 }
-            </div>
+            </div>            
             <TeachersPostsArea postsData={postsData} />
+            {emptyDataText &&
+                <div className="teacher-empty-post-text-div">
+                    <P text="You havn't any post yet!" />
+                </div>
+            }
         </section>
     );
 };

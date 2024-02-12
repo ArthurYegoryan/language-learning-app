@@ -1,0 +1,43 @@
+.t-post-modal, .t-post-overlay {
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: fixed;
+}
+
+.t-post-overlay {
+    background: rgba(49,49,49,0.8);
+}
+
+.t-post-modal-content {
+    text-align: center;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    line-height: 1.4;
+    background: #f1f1f1;
+    padding: 14px 28px;
+    margin-top: 50px;
+    border-radius: 10px;
+    max-width: 600px;
+    min-width: 300px;
+    max-height: 800px;
+    overflow-y: scroll;
+}
+.t-post-modal-content::-webkit-scrollbar {
+    display: none;
+}
+
+.t-post-modal-title-text {
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.t-post-close-modal-button {
+    background-color: red;
+    color: white;
+}

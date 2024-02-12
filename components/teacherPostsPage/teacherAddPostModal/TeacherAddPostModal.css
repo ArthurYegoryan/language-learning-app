@@ -1,4 +1,4 @@
-.t-post-modal-container {
+.t-add-post-modal-container {
     position: absolute;
     right: 0;
     margin-right: 10px;
@@ -7,42 +7,42 @@
     justify-content: flex-end;
 }
 
-.t-post-modal {
+.t-add-post-modal {
     width: 250px;
     border: 1px solid gray;
     padding: 10px;
     border-radius: 10px;
 }
 
-.t-post-modal-header {
+.t-add-post-modal-header {
     text-align: center;
     font-size: 25px;
 }
 
-.t-post-modal-header-text {font-weight: bold;
+.t-add-post-modal-header-text {font-weight: bold;
     margin-top: 0;
 }
 
-.t-post-modal-content {
+.t-add-post-modal-content {
     border: 1px solid gray;
     padding: 10px;
     border-radius: 10px;
     text-align: center;
 }
 
-.t-post-name-input {
+.t-add-post-name-input {
     border: 1px solid gray;
     border-radius: 5px;
     margin: auto;
     margin-bottom: 10px;
 }
 
-.t-post-success-add-text {
+.t-add-post-success-add-text {
     color: green;
 }
 
 .empty-username-error-text,
-.t-post-name-empty-error {
+.t-add-post-name-empty-error {
     color: red;
 }
 

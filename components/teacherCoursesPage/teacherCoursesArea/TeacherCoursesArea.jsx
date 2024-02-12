@@ -22,7 +22,6 @@ const TeacherCoursesArea = ({ coursesData }) => {
                 openCloseVideosModal();
             }
         });
-        console.log("onClickRelatedVideos");
     };
 
     return (

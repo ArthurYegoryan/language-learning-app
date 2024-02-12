@@ -2,26 +2,26 @@ import "./TeacherPostsArea.css";
 import Button from "@/generalComponents/button/Button.component";
 import P from "@/generalComponents/texts/P.component";
 import { useState } from "react";
+import TeacherPostModal from "./teacherPostModal/TeacherPostModal";
 
 const TeachersPostsArea = ({ postsData }) => {
-    const [ videosModal, setVideosModal ] = useState(false);
-    const [ selectedCourse, setSelectedCourse ] = useState({});
+    const [ postModal, setPostModal ] = useState(false);
+    const [ selectedPost, setSelectedPost ] = useState({});
 
-    const openCloseVideosModal = () => {
-        setVideosModal(!videosModal);
+    const openClosePostModal = () => {
+        setPostModal(!postModal);
     };
 
-    const onClickRelatedVideos = (id) => {
-        coursesData.map((course) => {
-            if (course.id === id) {
-                setSelectedCourse({
-                    ...course,
+    const onClickViewPost = (id) => {
+        postsData.map((post) => {
+            if (post.id === id) {
+                setSelectedPost({
+                    ...post,
                     isSelected: true
                 });
-                openCloseVideosModal();
+                openClosePostModal();
             }
         });
-        console.log("onClickRelatedVideos");
     };
 
     return (
@@ -33,7 +33,7 @@ const TeachersPostsArea = ({ postsData }) => {
                         <div className="teacher-post-card" key={post.id}>
                             <P text={post.postName} className="teacher-post-card-postname" />
                             <div className="teacher-post-card-container">
-                                <div className="teacher-post-short-text-div" onClick={() => console.log("Mtanq")}>
+                                <div className="teacher-post-short-text-div" onClick={() => onClickViewPost(post.id)}>
                                     <P text={post.postText.length > 3 ? post.postText.split(" ").slice(0, 3).join(" ") + "..." : post.postText}
                                        className="teacher-post-text" 
                                     />
@@ -48,7 +48,7 @@ const TeachersPostsArea = ({ postsData }) => {
                                     <Button label="View post" 
                                             className="view-post-button" 
                                             onClickHandler={() => {
-                                                console.log("Mtanq");
+                                                onClickViewPost(post.id);
                                             }}
                                     />
                                 </div>
@@ -56,9 +56,9 @@ const TeachersPostsArea = ({ postsData }) => {
                         </div>
                     );
                 })}
-                {/* {videosModal &&
-                    // <VideosModal course={selectedCourse} onRequestClose={openCloseVideosModal}/>
-                } */}
+                {postModal &&
+                    <TeacherPostModal post={selectedPost} onRequestClose={openClosePostModal}/>
+                }
             </div>
         </div>
     );
