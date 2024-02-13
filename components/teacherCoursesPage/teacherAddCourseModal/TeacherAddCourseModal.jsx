@@ -5,8 +5,9 @@ import Input from "@/generalComponents/inputComponents/generalInputComponent/Inp
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { addCourseToFireStore } from "@/services/api/addCourseToFireStore";
+import { v4 as uuid } from "uuid";
 
-const TeacherAddCourseModal = ({ setIsModalOpen, isCoursesChanged, setIsCoursesChanged }) => {
+const TeacherAddCourseModal = ({ setIsModalOpen, isCoursesChanged, setIsCoursesChanged, setEmptyDataText }) => {
     const [ courseName, setCourseName ] = useState("");
     const [ languageType, setLanguageType ] = useState("js");
     const { userid } = useSelector((state) => state.auth.value);
@@ -31,6 +32,7 @@ const TeacherAddCourseModal = ({ setIsModalOpen, isCoursesChanged, setIsCoursesC
                           + createdAtSeconds.getMinutes() + ":"
                           + createdAtSeconds.getSeconds();
         courseInfo.createdAt = createdAt;
+        courseInfo.id = uuid();
 
         console.log("Course info: " + JSON.stringify(courseInfo));
 
@@ -46,6 +48,7 @@ const TeacherAddCourseModal = ({ setIsModalOpen, isCoursesChanged, setIsCoursesC
                 setLanguageType("js");
                 setIsSuccessfullyAdded(true);
                 setIsCoursesChanged(!isCoursesChanged);
+                setEmptyDataText(false);
             }
         }        
     }

@@ -15,7 +15,8 @@ const VideosModal = ({ course, onRequestClose }) => {
     const [ isModalVideoDataImageHovered, setIsModalVideoDataImageHovered ] = useState(false);
     const [ showVideoURL, setShowVideoURL ] = useState(false);
     const [ videoUrl, setVideoUrl ] = useState("");
-    const [ videoUrlsForManuallyDownload, setVideoUrlsForManuallyDownload ] = useState({});
+    const [ emptyDataText, setEmptyDataText ] = useState(false);
+    const [ isVideosChanged, setIsVideosChanged ] = useState(false);
 
     const [ video, setVideo ] = useState("");
     const [ videoStorageID, setVideoStorageID ] = useState("");
@@ -63,6 +64,7 @@ const VideosModal = ({ course, onRequestClose }) => {
                         setVideoName("");
                         setVideoDescription("");
                         setIsVideoUploaded(true);
+                        setIsVideosChanged(true);
                     }
                 } else {
                     setVideoUploadError(true);
@@ -74,16 +76,25 @@ const VideosModal = ({ course, onRequestClose }) => {
     useEffect(() => {
         const fetchVideosData = async () => {
             const data = await fetchDataFromFirestore("teachersVideos");
-            data.map((videoData) => {
-                videoData.isHovered = false
-                videoData.isClicked = false
+            const teacherVideos = data.filter((videoData) => {
+                return videoData.user === userid && course.id === videoData.courseID;
             });
-            console.log("Videos data:");
-            console.log(JSON.stringify(data, null, 2));
-            setVideosData(data);
+
+            if (!teacherVideos.length) {
+                setEmptyDataText(true);
+            } else {
+                teacherVideos.map((videoData) => {
+                    videoData.isHovered = false
+                    videoData.isClicked = false
+                });
+                console.log("Videos data:");
+                console.log(JSON.stringify(teacherVideos, null, 2));
+                setVideosData(teacherVideos);
+                setEmptyDataText(false);
+            }            
         }
         fetchVideosData();
-    }, []);
+    }, [isVideosChanged]);
 
     const onMouseOverHandler = (videoData) => {
         videosData.map((data) => {
@@ -163,7 +174,9 @@ const VideosModal = ({ course, onRequestClose }) => {
                                    })
                                }}/>
                     </div>
-                    <Button label="+ Upload new video" className="t-upload-video-button" onClickHandler={onClickUploadButton} />
+                    <div className="t-upload-video-button-div">
+                        <Button label="+ Upload new video" className="t-upload-video-button" onClickHandler={onClickUploadButton} />
+                    </div>                    
                     {videoEmptyError &&
                         <P text="Video isn't choosen, please check!" className="t-video-error-text" />
                     }
@@ -208,7 +221,11 @@ const VideosModal = ({ course, onRequestClose }) => {
                                                     <img src="static/images/download.svg" alt="download" />
                                                 }
                                                 {!videoData.isHovered &&
-                                                    <img src={`static/images/${course.languageType}.svg`} alt="video" />
+                                                    <img src={course.languageType === "c#" ? `static/images/c_sharp.svg` : 
+                                                              course.languageType === "c++" ? `static/images/c_plus.svg` :
+                                                              `static/images/${course.languageType}.svg`} 
+                                                         alt="video" 
+                                                    />
                                                 }
                                             </div>
                                         </a>
@@ -236,8 +253,15 @@ const VideosModal = ({ course, onRequestClose }) => {
                             )
                         })
                     }
+                    {emptyDataText &&
+                        <div className="teacher-empty-video-text-div">
+                            <P text="You havn't any video yet!" />
+                        </div>
+                    }
                 </div>
-                <Button label="Close" className="t-close-modal-button" onClickHandler={onRequestClose} />
+                <div className="t-close-modal-button-div">
+                    <Button label="Close" className="t-close-modal-button" onClickHandler={onRequestClose} />
+                </div>                
             </div>            
         </div>
     );

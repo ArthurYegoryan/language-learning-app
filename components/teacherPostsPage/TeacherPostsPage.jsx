@@ -33,11 +33,11 @@ const TeacherPostsPage = () => {
 
             if (!teacherPosts.length) {
                 setEmptyDataText(true);
-            }
-
-            teacherPosts.map((post) => post.isSelected = false);
-            console.log(JSON.stringify(teacherPosts, null, 2));
-            setPostsData(teacherPosts);
+            } else {
+                teacherPosts.map((post) => post.isSelected = false);
+                console.log(JSON.stringify(teacherPosts, null, 2));
+                setPostsData(teacherPosts);
+            }            
         }
         fetchPostsData();
     }, [isPostsChanged]);
