@@ -1,9 +1,9 @@
 "use client";
 
-import "./TeacherPage.css";
+import "./StudentPage.css";
 import Header from "@/generalComponents/header/Header";
 
-const TeacherPage = () => {
+const StudentPage = () => {
     return (
         <section>
             <Header />
@@ -11,4 +11,4 @@ const TeacherPage = () => {
     );
 };
 
-export default TeacherPage;
+export default StudentPage;
