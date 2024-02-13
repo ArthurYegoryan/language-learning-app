@@ -1,0 +1,61 @@
+.s-start-courses-error-modal, .s-start-course-error-overlay {
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: fixed;
+}
+
+.s-start-course-error-overlay {
+    background: rgba(49,49,49,0.8);
+}
+
+.s-start-course-error-modal-content {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    line-height: 1.4;
+    background: red;
+    padding: 14px 28px;
+    margin-top: 50px;
+    border-radius: 10px;
+    max-width: 600px;
+    min-width: 300px;
+    max-height: 800px;
+    overflow-y: scroll;
+}
+.s-start-course-error-modal-content::-webkit-scrollbar {
+    display: none;
+}
+
+.s-start-course-error-modal-title-text {
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    margin-top: 0;
+    color: white;
+}
+
+.s-start-course-error-modal-icon-div {
+    text-align: center;
+    margin: auto;
+    width: 100px;
+}
+
+.s-start-course-error-modal-icon {
+    width: 100%;
+}
+
+.s-start-course-error-modal-button-div {
+    text-align: center;
+}
+
+.s-start-course-error-modal-button {
+    margin-top: 20px;
+    background-color: white;
+    color: red;
+    font-size: 20px;
+}

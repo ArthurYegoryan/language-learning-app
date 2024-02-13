@@ -4,12 +4,16 @@ import Button from "@/generalComponents/button/Button.component";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { fetchDataFromFirestore } from "@/services/api/fetchDataFromFirestore";
+import { v4 as uuid } from "uuid";
 import StartCourseModal from "./startCourseModal/StartCourseModal";
+import StartCourseErrorModal from "./startCourseErrorModal/StartCourseErrorModal";
+import { addStudyingCourseToFirestore } from "@/services/api/addStudyingCourseToFirestore";
 
 const CoursesForStudent = () => {
     const [ coursesData, setCoursesData ] = useState([]);
     const [ selectedCourse, setSelectedCourse ] = useState({});
     const [ openCloseStartCourseModal, setOpenCloseStartCourseModal ] = useState(false);
+    const [ openCloseStartCourseErrorModal, setOpenCloseStartCourseErrorModal ] = useState(false);
     const { userid } = useSelector((state) => state.auth.value);
 
     useEffect(() => {
@@ -21,10 +25,27 @@ const CoursesForStudent = () => {
         fetchCoursesData()
     }, []);
 
-    const onClickStartCourse = (course) => {
+    const onClickStartCourse = async (course) => {
         console.log("Clicked course id: " + course.id);
-        setSelectedCourse(course);
-        setOpenCloseStartCourseModal(true);
+        
+        const studyingCourseInfo = {
+            id: uuid(),
+            courseName: course.courseName,
+            createdAt: course.createdAt,
+            courseId: course.id,
+            teacherId: course.userid,
+            studentId: userid,
+            languageType: course.languageType
+        };
+
+        const added = await addStudyingCourseToFirestore(studyingCourseInfo);
+
+        if (added) {
+            setSelectedCourse(course);
+            setOpenCloseStartCourseModal(true);
+        } else {
+            setOpenCloseStartCourseErrorModal(true);
+        }
     };
 
     return (
@@ -58,6 +79,9 @@ const CoursesForStudent = () => {
                 })}
                 {openCloseStartCourseModal &&
                     <StartCourseModal course={selectedCourse} onRequestClose={() => setOpenCloseStartCourseModal(false)}/>
+                }
+                {openCloseStartCourseErrorModal &&
+                    <StartCourseErrorModal onRequestClose={() => setOpenCloseStartCourseErrorModal(false)} />
                 }
             </div>
         </div>
