@@ -3,6 +3,7 @@
 import "./StudentPage.css";
 import Header from "@/generalComponents/header/Header";
 import { useSelector } from "react-redux";
+import CoursesForStudent from "./coursesForStudent/CoursesForStudent";
 
 const StudentPage = () => {
     const { isMenuOpen } = useSelector((state) => state.menu);
@@ -14,7 +15,7 @@ const StudentPage = () => {
         <section className="s-page-section">
             <Header />
             <div className={`s-page-content ${className}`}>
-                Barlus Hayer
+                <CoursesForStudent />
             </div>
         </section>
     );

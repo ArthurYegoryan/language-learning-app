@@ -1,60 +1,61 @@
-.teacher-courses-header-text {
+.s-all-courses-header-text {
     text-align: center;
-    font-size: 40px;
+    font-size: 30px;
     font-weight: bold;
 }
 
-.teacher-courses-container {
+.s-all-courses-container {
     display: flex;
     justify-content: center;
 }
 
-.teacher-course-card {
-    width: 200px;
+.s-all-course-card {
+    width: 150px;
     border: 1px solid gray;
     border-radius: 10px;
     margin: 10px;
 }
 
-.teacher-course-card-coursename {
+.s-all-course-card-coursename {
     text-align: center;
-    font-size: 25px;
+    font-size: 18px;
     font-weight: bold;
     margin-bottom: 0;
     height: 6vh;
 }
 
-.teacher-course-card-image-info {
+.s-all-course-card-image-info {
     width: 100%;
 }
 
-.teacher-course-card-image {
+.s-all-course-card-image {
     width: 100%;
-}
-
-.teacher-course-card-image > img {
-    width: 90%;
-    margin-left: 5%;
-}
-
-.teacher-course-card-info {
+    height: 110px;
     text-align: center;
-    font-size: 18px;
 }
 
-.teacher-course-card-info > p {
+.s-all-course-card-image > img {
+    width: 60%;
+}
+
+.s-all-course-card-info {
+    text-align: center;
+    font-size: 14px;
+}
+
+.s-all-course-card-info > p {
     margin-top: 0;
     margin-bottom: 5px;
     padding-left: 20px;
     padding-right: 20px;
 }
 
-.see-related-videos-div {
+.s-start-course-button-div {
     text-align: center;
     margin-bottom: 5px;
 }
 
-.see-related-videos-button {
-    background-color: gray;
+.s-start-course-button {
+    background-color: green;
     color: white;
 }

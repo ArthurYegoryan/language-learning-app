@@ -27,11 +27,11 @@ const NavLinks = () => {
                 }
                 {role === "student" &&
                     <>
-                        <MenuLink routePath="student/followingCourses" 
+                        <MenuLink routePath="student/studyingCourses" 
                             imagePath="/static/images/" 
                             imageName="video" 
                             imageType="svg" 
-                            label="Following courses" 
+                            label="Studying courses" 
                         />
                         <MenuLink routePath="student/savedPosts" 
                             imagePath="/static/images/" 

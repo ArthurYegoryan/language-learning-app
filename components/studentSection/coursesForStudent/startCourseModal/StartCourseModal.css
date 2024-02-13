@@ -1,0 +1,63 @@
+.s-start-courses-modal, .s-start-course-overlay {
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: fixed;
+}
+
+.s-start-course-overlay {
+    background: rgba(49,49,49,0.8);
+}
+
+.s-start-course-modal-content {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    line-height: 1.4;
+    background: green;
+    padding: 14px 28px;
+    margin-top: 50px;
+    border-radius: 10px;
+    max-width: 600px;
+    min-width: 300px;
+    max-height: 800px;
+    overflow-y: scroll;
+}
+.s-start-course-modal-content::-webkit-scrollbar {
+    display: none;
+}
+
+.s-start-course-modal-title-text {
+    text-align: center;
+    font-size: 35px;
+    font-weight: bold;
+    margin-top: 0;
+    color: white;
+}
+
+.s-start-course-modal-text-div {
+    text-align: center;
+}
+
+.s-start-course-modal-general-text {
+    color: white;
+    margin-bottom: 5px;
+}
+
+.s-start-course-modal-good-luck {
+    margin-top: 0;
+    color: white;
+}
+
+.s-start-course-modal-button-div {
+    text-align: center;
+}
+
+.s-start-course-modal-button {
+    background-color: white;
+    color: green;
+}
