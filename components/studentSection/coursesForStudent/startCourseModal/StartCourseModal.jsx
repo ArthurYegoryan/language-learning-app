@@ -3,8 +3,6 @@ import P from "@/generalComponents/texts/P.component";
 import Button from "@/generalComponents/button/Button.component";
 
 const StartCourseModal = ({ course, onRequestClose }) => {
-    console.log("Course: ", course);
-
     return (
         <div className="s-start-course-modal">
             <div onClick={onRequestClose} className="s-start-course-overlay"></div>
