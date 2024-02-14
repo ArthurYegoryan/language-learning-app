@@ -11,23 +11,37 @@ import { addStudyingCourseToFirestore } from "@/services/api/addStudyingCourseTo
 
 const CoursesForStudent = () => {
     const [ coursesData, setCoursesData ] = useState([]);
-    const [ selectedCourse, setSelectedCourse ] = useState({});
+    const [ studyingCoursesData, setStudyingCoursesData ] = useState([]);
+    const [ startedCourse, setStartedCourse ] = useState([]);
+    const [ isStartedCourse, setIsStartedCourse ] = useState(false);
     const [ openCloseStartCourseModal, setOpenCloseStartCourseModal ] = useState(false);
     const [ openCloseStartCourseErrorModal, setOpenCloseStartCourseErrorModal ] = useState(false);
     const { userid } = useSelector((state) => state.auth.value);
 
     useEffect(() => {
         const fetchCoursesData = async () => {
-            const data = await fetchDataFromFirestore("courses");
-            console.log("Data: ", data);
-            setCoursesData(data);
+            const coursesdata = await fetchDataFromFirestore("courses");
+            const studyingCoursesData = await fetchDataFromFirestore("studyingCourses");
+
+            setCoursesData(coursesdata);
+            setStudyingCoursesData(studyingCoursesData);
         };
-        fetchCoursesData()
-    }, []);
+        fetchCoursesData();
+    }, [isStartedCourse]);
+
+    const courseSelectedHandler = (course) => {
+        let isSelected = false;
+        
+        studyingCoursesData.map((studyingCourse) => {
+            if (studyingCourse.courseId === course.id && studyingCourse.studentId === userid) {
+                isSelected = true;
+            }
+        });
+
+        return isSelected;
+    }
 
     const onClickStartCourse = async (course) => {
-        console.log("Clicked course id: " + course.id);
-        
         const studyingCourseInfo = {
             id: uuid(),
             courseName: course.courseName,
@@ -41,8 +55,9 @@ const CoursesForStudent = () => {
         const added = await addStudyingCourseToFirestore(studyingCourseInfo);
 
         if (added) {
-            setSelectedCourse(course);
             setOpenCloseStartCourseModal(true);
+            setIsStartedCourse(true);
+            setStartedCourse(course);
         } else {
             setOpenCloseStartCourseErrorModal(true);
         }
@@ -68,17 +83,24 @@ const CoursesForStudent = () => {
                                     <P text={`Creation time: ` + course.createdAt} />
                                 </div>
                                 <div className="s-start-course-button-div">
-                                    <Button label="Start the course!"
+                                    { courseSelectedHandler(course) ?
+                                        <button disabled 
+                                                className="s-course-started-button" 
+                                        >
+                                            Course is started!
+                                        </button> :
+                                        <Button label="Start the course!"
                                             className="s-start-course-button" 
                                             onClickHandler={() => onClickStartCourse(course)}
-                                    />
+                                        />
+                                    }                                    
                                 </div>
                             </div>
                         </div>
                     );
                 })}
                 {openCloseStartCourseModal &&
-                    <StartCourseModal course={selectedCourse} onRequestClose={() => setOpenCloseStartCourseModal(false)}/>
+                    <StartCourseModal course={startedCourse} onRequestClose={() => setOpenCloseStartCourseModal(false)}/>
                 }
                 {openCloseStartCourseErrorModal &&
                     <StartCourseErrorModal onRequestClose={() => setOpenCloseStartCourseErrorModal(false)} />
