@@ -1,7 +1,7 @@
 import { db } from "@/utils/firebaseConfig";
 import { collection, addDoc } from "firebase/firestore";
 
-export const addCourseToFireStore = async (savedPostInfo) => {
+export const addSavedPostToFireStore = async (savedPostInfo) => {
     try {
         const docRef = await addDoc(collection(db, "savedPosts"), savedPostInfo);
         return true;
@@ -9,4 +9,4 @@ export const addCourseToFireStore = async (savedPostInfo) => {
         console.error("Error adding document ", err);
         return  false;
     }
-}
+};

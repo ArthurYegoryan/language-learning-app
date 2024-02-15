@@ -2,23 +2,37 @@ import "./PostsForStudent.css";
 import P from "@/generalComponents/texts/P.component";
 import Button from "@/generalComponents/button/Button.component";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { fetchDataFromFirestore } from "@/services/api/fetchDataFromFirestore";
 import TeacherPostModal from "@/components/teacherPostsPage/teacherPostsArea/teacherPostModal/TeacherPostModal";
+import { addSavedPostToFireStore } from "@/services/api/addSavedPostToFireStore";
+import { v4 as uuid } from "uuid";
 
 const PostsForStudent = () => {
     const [ postsdata, setPostsData ] = useState([]);
+    const [ savedPostsdata, setSavedPostsData ] = useState([]);
     const [ postModal, setPostModal ] = useState(false);
     const [ selectedPost, setSelectedPost ] = useState({});
+    const [ isSavedPostAdded, setIsSavedPostAdded ] = useState(false);
+    const { userid } = useSelector((state) => state.auth.value);
 
     useEffect(() => {
         const fetchPostsData = async () => {
             const postsdata = await fetchDataFromFirestore("posts");
 
             setPostsData(postsdata);
-            console.log("Posts data: ", postsdata);
         };
         fetchPostsData();
     }, []);
+
+    useEffect(() => {
+        const fetchPostsData = async () => {
+            const savedPostsData = await fetchDataFromFirestore("savedPosts");
+
+            setSavedPostsData(savedPostsData);
+        };
+        fetchPostsData();
+    }, [isSavedPostAdded]);
 
     const openClosePostModal = () => {
         setPostModal(!postModal);
@@ -36,8 +50,34 @@ const PostsForStudent = () => {
         });
     };
 
-    const onClickSaveButton = (post) => {
-        console.log("Post saved");
+    const savedPostHandler = (post) => {
+        let isSaved = false;
+
+        savedPostsdata.map((savedPost) => {
+            if (savedPost.postId === post.id && savedPost.studentId === userid) {
+                isSaved = true;
+            }
+        });
+
+        return isSaved;
+    }
+
+    const onClickSaveButton = async (post) => {
+        const savedPostData = {
+            id: uuid(),
+            postName: post.postName,
+            postText: post.postText,
+            createdAt: post.createdAt,
+            postId: post.id,
+            authorId: post.userid,
+            studentId: userid,
+        };
+
+        const added = await addSavedPostToFireStore(savedPostData);
+
+        if (added) {
+            setIsSavedPostAdded(true);
+        }
     }
 
     return (
@@ -67,9 +107,13 @@ const PostsForStudent = () => {
                                                 onClickViewPost(post.id);
                                             }}
                                     />
-                                    <Button label="Save" 
+                                    {savedPostHandler(post) ?
+                                        <button disabled className="s-all-post-saved-button">Saved</button> :
+                                        <Button label="Save" 
                                             className="s-all-save-post-button"
-                                            onClickHandler={() => onClickSaveButton()} />
+                                            onClickHandler={() => onClickSaveButton(post)} 
+                                        />
+                                    }                                    
                                 </div>
                             </div>
                         </div>
