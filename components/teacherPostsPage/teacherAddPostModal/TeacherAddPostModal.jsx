@@ -7,8 +7,9 @@ import Button from "@/generalComponents/button/Button.component";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { addPostToFireStore } from "@/services/api/addPostToFireStore";
+import { v4 as uuid } from "uuid";
 
-const TeacherAddPostModal = ({ setIsModalOpen, setIsPostsChanged }) => {
+const TeacherAddPostModal = ({ setIsModalOpen, setIsPostsChanged, setEmptyDataText }) => {
     const [ postName, setPostName ] = useState("");
     const [ postNameError, setPostNameError ] = useState(false);
     const [ postText, setPostText ] = useState("");
@@ -18,6 +19,7 @@ const TeacherAddPostModal = ({ setIsModalOpen, setIsPostsChanged }) => {
     const [ isSuccessfullyAdded, setIsSuccessfullyAdded ] = useState(false);
 
     const postInfo = {
+        id: uuid(),
         postName,
         postText,
         userid,
@@ -51,6 +53,7 @@ const TeacherAddPostModal = ({ setIsModalOpen, setIsPostsChanged }) => {
                 setPostText("");
                 setIsSuccessfullyAdded(true);
                 setIsPostsChanged(true);
+                setEmptyDataText(false);
             }
         }
     }

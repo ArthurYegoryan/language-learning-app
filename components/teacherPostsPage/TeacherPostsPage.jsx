@@ -50,7 +50,10 @@ const TeacherPostsPage = () => {
                 </button>
                 <Button label="+ Add new post" className="add-new-post-button" onClickHandler={onClickAddCourse} />
                 {isModalOpen &&
-                    <TeacherAddPostModal setIsModalOpen={setIsModalOpen} setIsPostsChanged={setIsPosChanged} />
+                    <TeacherAddPostModal setIsModalOpen={setIsModalOpen} 
+                                         setIsPostsChanged={setIsPosChanged} 
+                                         setEmptyDataText={setEmptyDataText} 
+                    />
                 }
             </div>            
             <TeachersPostsArea postsData={postsData} />
