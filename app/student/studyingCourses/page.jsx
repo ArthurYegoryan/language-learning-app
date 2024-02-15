@@ -1,8 +1,8 @@
+import StudentStudyingCourses from "@/components/studentStudyingCoursesPage/StudentStudyingCourses";
+
 const FollowingCourses = () => {
     return (
-        <div>
-            Following Courses
-        </div>
+        <StudentStudyingCourses />
     );
 };
 

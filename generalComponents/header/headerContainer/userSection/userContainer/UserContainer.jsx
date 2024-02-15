@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import "./UserContainer.css";
+import P from "@/generalComponents/texts/P.component";
 
 const UserContainer = () => {
     const { username } = useSelector((state) => state.auth.value);
@@ -7,7 +8,7 @@ const UserContainer = () => {
     return (
         <div className="user-container">
             <img src="/static/images/user.svg" alt="user" />
-            <p>{username}</p>
+            <P text={username} className="user-username" />
         </div>
     );
 };

@@ -1,7 +1,7 @@
 const SavedPosts = () => {
     return (
         <div>
-            Saved posts
+            Saved Posts
         </div>
     );
 };
