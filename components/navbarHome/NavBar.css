@@ -3,6 +3,10 @@
     width: 100%;
 }
 
+.about-contact-part {
+    display: flex;
+}
+
 .reg-login-part {
     display: flex;
     justify-content: flex-end;

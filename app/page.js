@@ -1,10 +1,11 @@
-import Navbar from "../components/navbarHome/NavBar";
+import Navbar from '../components/navbarHome/NavBar';
+import HomePage from '@/components/homePage/HomePage';
 
 export default function Home() {
-  return (
-    <main className="app">
-      <Navbar />
-      <div>Home page</div>
-    </main>
-  )
+    return (
+        <main className='app'>
+            <Navbar />
+            <HomePage />
+        </main>
+    );
 }
