@@ -5,6 +5,7 @@ import P from "@/generalComponents/texts/P.component";
 import Button from "@/generalComponents/button/Button.component";
 import { fetchDataFromFirestore } from "@/services/api/fetchDataFromFirestore";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import StudentStudyingCourseModal from "./studentStudyingCourseModal/StudentStudyingCourseModal";
 
 const StudentStudyingCourses = () => {
@@ -13,6 +14,7 @@ const StudentStudyingCourses = () => {
     const [ teachers, setTeachers ] = useState([]);
     const [ isOpenStudyingCourseModal, setIsOpenStudyingCourseModal ] = useState(false);
     const [ selectedStudyingCourse, setSelectedStudyingCourse ] = useState({});
+    const { push } = useRouter();
 
     useEffect(() => {
         const fetchCoursesData = async () => {
@@ -34,11 +36,11 @@ const StudentStudyingCourses = () => {
 
     const getUsernameByID = (course) => {
         return teachers.filter((elem) => elem.id === course.teacherId)[0].username;
-    }
+    };
 
     const openCloseStudyingCourseModal = () => {
         setIsOpenStudyingCourseModal(!isOpenStudyingCourseModal);
-    }
+    };
 
     const studyingCourseButtonHandler = (course) => {
         studyingCourses.map((studyingCourse) => {
@@ -50,10 +52,17 @@ const StudentStudyingCourses = () => {
                 openCloseStudyingCourseModal();
             }
         });
-    }
+    };
+
+    const onClickHome = () => {
+        push("/student");
+    };
 
     return(
         <div className="studying-courses-section">
+            <button className="studying-courses-go-home-button" onClick={onClickHome}>
+                <img src="/static/images/home.svg" alt="home" />
+            </button>
             <div className="studying-courses-cards">
                 {
                     studyingCourses.map((course) => {

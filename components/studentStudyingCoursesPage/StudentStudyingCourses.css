@@ -10,10 +10,35 @@
     background-color: blue;
 }
 
+.studying-courses-go-home-button {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    top: 10px;
+    left: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.studying-courses-go-home-button:hover {
+    opacity: 0.7;
+}
+.studying-courses-go-home-button:active {
+    opacity: 1;
+}
+
+.studying-courses-go-home-button > img {
+    width: 100%;
+}
+
 .studying-courses-cards {
     margin: auto;
     width: 700px;
     height: 99%;
+    overflow-y: scroll;
+}
+.studying-courses-cards::-webkit-scrollbar {
+    display: none;
 }
 
 .studying-course-card {
