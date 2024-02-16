@@ -5,11 +5,14 @@ import P from "@/generalComponents/texts/P.component";
 import Button from "@/generalComponents/button/Button.component";
 import { fetchDataFromFirestore } from "@/services/api/fetchDataFromFirestore";
 import { useEffect, useState } from "react";
+import StudentStudyingCourseModal from "./studentStudyingCourseModal/StudentStudyingCourseModal";
 
 const StudentStudyingCourses = () => {
     const [ studyingCourses, setStudyingCourses ] = useState([]);
     const [ isEmptyStudyingCourses, setIsEmptyStudyingCourses ] = useState(false);
     const [ teachers, setTeachers ] = useState([]);
+    const [ isOpenStudyingCourseModal, setIsOpenStudyingCourseModal ] = useState(false);
+    const [ selectedStudyingCourse, setSelectedStudyingCourse ] = useState({});
 
     useEffect(() => {
         const fetchCoursesData = async () => {
@@ -29,11 +32,24 @@ const StudentStudyingCourses = () => {
         fetchCoursesData();
     }, []);
 
-    console.log("Users: ", JSON.stringify(teachers, null, 2));
-    console.log("Studying courses: ", JSON.stringify(studyingCourses, null, 2));
-
     const getUsernameByID = (course) => {
         return teachers.filter((elem) => elem.id === course.teacherId)[0].username;
+    }
+
+    const openCloseStudyingCourseModal = () => {
+        setIsOpenStudyingCourseModal(!isOpenStudyingCourseModal);
+    }
+
+    const studyingCourseButtonHandler = (course) => {
+        studyingCourses.map((studyingCourse) => {
+            if (studyingCourse.id === course.id) {
+                setSelectedStudyingCourse({
+                    ...studyingCourse,
+                    isSelected: true
+                });
+                openCloseStudyingCourseModal();
+            }
+        });
     }
 
     return(
@@ -65,8 +81,14 @@ const StudentStudyingCourses = () => {
                                         </div>
                                         <div className="studying-course-buttons">
                                             <Button label="View videos" 
-                                                    className="studying-course-view-video-button" 
+                                                    className="studying-course-view-video-button"
+                                                    onClickHandler={() => studyingCourseButtonHandler(course)}
                                             />
+                                            {isOpenStudyingCourseModal &&
+                                                <StudentStudyingCourseModal studyingCourse={selectedStudyingCourse} 
+                                                                            teachers={teachers}
+                                                                            onRequestClose={openCloseStudyingCourseModal} />
+                                            }
                                             <Button label="Stop studying" 
                                                     className="studying-course-stop-studying-button" 
                                             />
