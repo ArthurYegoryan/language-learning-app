@@ -2,6 +2,7 @@
 
 import "./NavBar.css";
 import NavLinks from "./navLinks/NavLinks";
+import Logo from "@/generalComponents/logo/Logo";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
 import { editMenuStatusFalse, editMenuStatusTrue } from "@/redux/features/menuSlice";
@@ -29,7 +30,7 @@ const NavBar = () => {
     return (
         <div className="nav-bar">
             <div className={menuClass}>
-                {/* <LogoComponent className="logo-nav-bar"/> */}
+                <Logo />
                 <NavLinks />
             </div>
             <div className="burger-menu" onClick={updateMenu}>
