@@ -32,6 +32,10 @@ const StudentStudyingCourses = () => {
     console.log("Users: ", JSON.stringify(teachers, null, 2));
     console.log("Studying courses: ", JSON.stringify(studyingCourses, null, 2));
 
+    const getUsernameByID = (course) => {
+        return teachers.filter((elem) => elem.id === course.teacherId)[0].username;
+    }
+
     return(
         <div className="studying-courses-section">
             <div className="studying-courses-cards">
@@ -49,6 +53,24 @@ const StudentStudyingCourses = () => {
                                               `static/images/${course.languageType}.svg` 
                                              } 
                                          alt={`${course.languageType}`} />
+                                    </div>
+                                    <div className="studying-course-info">
+                                        <div className="studying-course-author-info">
+                                            <P text="Author ->" className="studying-course-info-author" />
+                                            <P text={getUsernameByID(course)} className="studying-course-info-authorname" />
+                                        </div>
+                                        <div className="studying-course-createdAt-info">
+                                            <P text="Created at ->" className="studying-course-info-createdAt-text" />
+                                            <P text={course.createdAt} className="studying-course-info-createdAt-time" />
+                                        </div>
+                                        <div className="studying-course-buttons">
+                                            <Button label="View videos" 
+                                                    className="studying-course-view-video-button" 
+                                            />
+                                            <Button label="Stop studying" 
+                                                    className="studying-course-stop-studying-button" 
+                                            />
+                                        </div>
                                     </div>
                                 </div>
                             </div>
