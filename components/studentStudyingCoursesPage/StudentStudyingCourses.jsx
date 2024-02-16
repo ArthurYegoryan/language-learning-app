@@ -7,6 +7,7 @@ import { fetchDataFromFirestore } from "@/services/api/fetchDataFromFirestore";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import StudentStudyingCourseModal from "./studentStudyingCourseModal/StudentStudyingCourseModal";
+import { deleteDataFromFireStore } from "@/services/api/deleteDataFromFireStore";
 
 const StudentStudyingCourses = () => {
     const [ studyingCourses, setStudyingCourses ] = useState([]);
@@ -34,6 +35,10 @@ const StudentStudyingCourses = () => {
         fetchCoursesData();
     }, []);
 
+    const onClickHome = () => {
+        push("/student");
+    };
+
     const getUsernameByID = (course) => {
         return teachers.filter((elem) => elem.id === course.teacherId)[0].username;
     };
@@ -52,10 +57,6 @@ const StudentStudyingCourses = () => {
                 openCloseStudyingCourseModal();
             }
         });
-    };
-
-    const onClickHome = () => {
-        push("/student");
     };
 
     return(
@@ -99,7 +100,8 @@ const StudentStudyingCourses = () => {
                                                                             onRequestClose={openCloseStudyingCourseModal} />
                                             }
                                             <Button label="Stop studying" 
-                                                    className="studying-course-stop-studying-button" 
+                                                    className="studying-course-stop-studying-button"
+                                                    onClickHandler={() => deleteDataFromFireStore(studyingCourses, course)}
                                             />
                                         </div>
                                     </div>
