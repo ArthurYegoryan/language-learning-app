@@ -4,6 +4,7 @@ import InputRadio from "@/generalComponents/inputComponents/inputRadioComponent/
 import Button from "@/generalComponents/button/Button.component";
 import P from "@/generalComponents/texts/P.component";
 import { useState } from "react";
+import Link from "next/link";
 
 const MainRegistrationPage = ({
     setUsername,
@@ -64,6 +65,12 @@ const MainRegistrationPage = ({
                     <Button label="Continue registration" className="reg-continue-button" />
                 </div>
             </form>
+            <div className="reg-area-go-to-login-div">
+                <Link href="/login" className="reg-area-go-to-login-link">I already have an account</Link>
+            </div>
+            <div className="reg-area-back-home-link-div">
+                <Link href="/" className="reg-area-back-home-link">Back to home page</Link>
+            </div>
         </div>
     );
 };

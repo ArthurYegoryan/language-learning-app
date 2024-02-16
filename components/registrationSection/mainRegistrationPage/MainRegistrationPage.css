@@ -34,3 +34,22 @@
     width: 200px;
     margin-top: 0;
 }
+
+.reg-area-go-to-login-div,
+.reg-area-back-home-link-div {
+    text-align: end;
+}
+
+.reg-area-go-to-login-div {
+    margin-top: 15px;
+}
+
+.reg-area-back-home-link-div {
+    margin-top: 5px;
+}
+
+.reg-area-go-to-login-link,
+.reg-area-back-home-link {
+    color: white;
+    text-decoration: none;
+}

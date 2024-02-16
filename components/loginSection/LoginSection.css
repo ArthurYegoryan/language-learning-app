@@ -36,3 +36,22 @@ body {
     margin-top: 5px;
     color: red;
 }
+
+.login-area-go-to-reg-div,
+.login-area-back-home-link-div {
+    text-align: end;
+}
+
+.login-area-go-to-reg-div {
+    margin-top: 15px;
+}
+
+.login-area-back-home-link-div {
+    margin-top: 5px;
+}
+
+.login-area-go-to-reg-link,
+.login-area-back-home-link {
+    color: white;
+    text-decoration: none;
+}

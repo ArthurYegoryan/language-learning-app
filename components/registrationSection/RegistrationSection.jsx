@@ -109,6 +109,7 @@ const RegistrationSection = () => {
     };
 
     return (
+        <>
         <section className="registration-section">
             {showMainRegistration &&
                 <MainRegistrationPage setUsername={setUsername}
@@ -143,6 +144,8 @@ const RegistrationSection = () => {
                 />
             }
         </section>
+       
+        </>
     );
 };
 

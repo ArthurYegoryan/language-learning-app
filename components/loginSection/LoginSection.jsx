@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { logIn, logInUserid, logInUserRole } from "@/redux/features/authSlice";
 import { useDispatch } from "react-redux";
+import Link from "next/link";
 
 const fetchUserDataFromFirestore = async () => {
     const querySnapshot = await getDocs(collection(db, "users"));
@@ -83,6 +84,12 @@ const LoginSection = () => {
                         <Button label="Login" className="login-button" />
                     </div>
                 </form>
+                <div className="login-area-go-to-reg-div">
+                    <Link href="/registration" className="login-area-go-to-reg-link">I havn't an account</Link>
+                </div>
+                <div className="login-area-back-home-link-div">
+                    <Link href="/" className="login-area-back-home-link">Back to home page</Link>
+                </div>
             </div>
         </section>
     );
