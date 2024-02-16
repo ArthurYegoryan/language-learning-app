@@ -1,8 +1,8 @@
+import StudentSavedPosts from "@/components/studentSavedPostsPage/StudentSavedPosts";
+
 const SavedPosts = () => {
     return (
-        <div>
-            Saved Posts
-        </div>
+        <StudentSavedPosts />
     );
 };
 

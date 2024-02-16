@@ -1,0 +1,137 @@
+.saved-posts-section {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: blue;
+}
+
+.saved-posts-go-home-button {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    top: 10px;
+    left: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.saved-posts-go-home-button:hover {
+    opacity: 0.7;
+}
+.saved-posts-go-home-button:active {
+    opacity: 1;
+}
+
+.saved-posts-go-home-button > img {
+    width: 100%;
+}
+
+.saved-posts-cards {
+    display: grid;
+    gap: 20px;
+    grid-column-start: 1;
+    grid-column-end: 5;
+    width: 1100px;
+    margin: auto;
+    margin-top: 30px;
+    height: 96%;
+}
+
+.saved-posts-card {
+    width: 200px;
+    background-color: white;
+    height: 300px;
+    border-radius: 10px;
+}
+
+.saved-posts-card-coursename-div {
+    text-align: center;
+}
+
+.saved-posts-card-postname {
+    margin-top: 10px;
+    font-weight: bold;
+    font-size: 25px;
+}
+
+.saved-posts-card-container {
+    width: 100%;
+    height: 220px;
+}
+
+.saved-posts-short-text-div {
+    width: 80%;
+    height: 60px;
+    margin-left: 5%;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid gray;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.saved-posts-short-text-div:hover {
+    opacity: 0.7;
+}
+
+.saved-posts-text {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.saved-posts-arrow-down-icon-div {
+    text-align: center;
+}
+
+.saved-posts-arrow-down-icon {
+    width: 20px;
+}
+
+.saved-posts-card-info {
+    text-align: center;
+    font-size: 14px;
+}
+
+.saved-posts-card-info > p {
+    margin-top: 0;
+    margin-bottom: 5px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.saved-posts-author-info {
+    text-align: center;
+}
+
+.saved-posts-info-author {
+    font-weight: bold;
+    margin-bottom: 0;
+}
+
+.saved-posts-info-authorname {
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+.saved-posts-buttons-div {
+    text-align: center;
+    margin-bottom: 5px;
+    margin-top: 15px;
+}
+
+.saved-posts-view-post-button {
+    background-color: gray;
+    color: white;
+    margin-right: 5px;
+}
+
+.saved-posts-delete-post-button {
+    background-color: red;
+    color: white;
+    margin-left: 5px;
+}
+
+.saved-posts-empty-text-div {
+    text-align: center;
+    margin-top: 200px;
+    font-size: 40px;
+}
