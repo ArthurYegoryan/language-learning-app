@@ -1,4 +1,4 @@
-.input-div {
+/* .input-div {
     width: 200px;
 }
 
@@ -8,4 +8,43 @@
     padding: 5px 10px;
     border-radius: 5px;
     border: none;
+} */
+
+.login-input-div,
+.reg-input-div {
+    border: 1px solid gray;
+    border-radius: 3px;
+    padding: 12px;
+    margin-bottom: 20px;
+    color: black;
+    width: auto;
+    align-items: center;
+    display: flex;
+    margin-right: 15px;
+    margin-left: 15px;
+
+    width: 90%;
+    font-size: 18px;
+    border-radius: 5px;
+}
+
+.input-teacher-add-info {
+    /* border: 1px solid gray; */
+    border-radius: 3px;
+    padding: 12px;
+    margin-bottom: 20px;
+    color: black;
+    width: auto;
+    align-items: center;
+    display: flex;
+    margin-right: 15px;
+    margin-left: 15px;
+
+    width: 90%;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+.login-input-div:focus {
+    outline: 1px solid black;
 }

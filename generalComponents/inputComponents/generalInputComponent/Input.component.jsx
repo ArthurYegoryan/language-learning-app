@@ -1,18 +1,18 @@
-import "@/generalComponents/inputComponents/generalInputComponent/Input.component.css";
+import '@/generalComponents/inputComponents/generalInputComponent/Input.component.css';
 
 const Input = ({
-    type = "text",
+    type = 'text',
     placeholder,
     onChangeHandler,
-    classNameDiv
+    classNameDiv,
 }) => {
     return (
-        <div className={`input-div ${classNameDiv}`}>
-            <input type={type}
-                   placeholder={placeholder} 
-                   onChange={onChangeHandler} 
-            />
-        </div>
+        <input
+            type={type}
+            placeholder={placeholder}
+            onChange={onChangeHandler}
+            className={`input-div ${classNameDiv}`}
+        />
     );
 };
 

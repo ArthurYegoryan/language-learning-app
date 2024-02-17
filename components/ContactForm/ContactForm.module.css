@@ -1,8 +1,24 @@
+/* ContactForm.module.css */
+
+.mainContainer {
+    width: 100%;
+    height: 100vh;
+    background: #001660;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .contactInfoMain {
-    font-size: 16px;
-    display: block;
-    margin-bottom: 6px;
-    color: #060606;
+    background: #fff;
+    display: flex;
+    width: 90%;
+    max-width: 700px;
+    height: 500px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .container {
@@ -13,6 +29,7 @@
 
 .titleMain {
     text-align: center !important;
+    padding-bottom: 20px;
 }
 
 .titleStyle {
@@ -83,6 +100,12 @@
     color: red;
 }
 
+.formGroup2 {
+    display: flex;
+    justify-content: flex-end;
+    /* Align button container to the right */
+}
+
 .customBtn {
     width: 150px;
     height: 60px;
@@ -103,8 +126,4 @@
 .btn1 {
     background: linear-gradient(0deg, rgb(65, 76, 226) 0%, rgb(63, 77, 228) 100%);
     border: none;
-}
-
-.btn1:hover {
-    background: rgb(220, 149, 18);
 }
