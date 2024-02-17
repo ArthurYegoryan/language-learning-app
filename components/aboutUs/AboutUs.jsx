@@ -1,7 +1,16 @@
+"use client";
+
 import "./AboutUs.css";
 import Button from "@/generalComponents/button/Button.component";
+import { useRouter } from "next/navigation";
 
 const AboutUs = () => {
+    const { push } = useRouter();
+
+    const goHomeButtonHandler = () => {
+        push("/");
+    };
+
     return (
       <div className="about-us-container">
         <div className="about-us-video-background">
@@ -21,7 +30,10 @@ const AboutUs = () => {
             <p>Be sure that this can be the beginning of your path to great success!</p>
             <p>So, let's try!!!</p>
         </div>
-        <Button label="HOME" className="about-us-go-home-button" />
+        <Button label="HOME" 
+                className="about-us-go-home-button"
+                onClickHandler={goHomeButtonHandler}
+        />
       </div>
     );
 };

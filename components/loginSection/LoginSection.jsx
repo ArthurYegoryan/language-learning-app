@@ -40,14 +40,10 @@ const LoginSection = () => {
     }, []);
 
     const checkLogin = (evt) => {
-        evt.preventDefault();        
-
-        console.log("User data:");
-        console.log(JSON.stringify(userData, null, 2));
+        evt.preventDefault();
 
         userData.forEach((user) => {
             if (user.username === username && user.password === password) {
-                console.log(`User id: ${user.id}`);
                 dispatch(logIn(username));
                 dispatch(logInUserid(user.id));
                 dispatch(logInUserRole(user.role));
