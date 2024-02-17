@@ -1,0 +1,20 @@
+.p-sign-in,
+.p-sign-up {
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+}
+
+.p-teacher-add-info {
+    font-size: 30px;
+    display: flex;
+    align-items: center;
+    width: 350px;
+}
+
+.p-invalid-field,
+.role-error-text {
+    display: flex;
+    justify-content: center;
+    color: red;
+}
