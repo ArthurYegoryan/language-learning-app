@@ -26,7 +26,7 @@ const VideosModal = ({ course, onRequestClose }) => {
     const [ videoNameEmptyError, setVideoNameEmptyError ] = useState(false);
     const [ isVideoUploaded, setIsVideoUploaded ] = useState(false);
     const [ videoUploadError, setVideoUploadError ] = useState(false);
-    const { userid } = useSelector((state) => state.auth.value);
+    let { userid } = useSelector((state) => state.auth.value);
     const [ videoInfo, setVideoInfo ] = useState({
                                             videoStorageID,
                                             videoName,
@@ -34,6 +34,8 @@ const VideosModal = ({ course, onRequestClose }) => {
                                             courseID: course.id,
                                             user: userid
                                         });
+
+    if (!userid) userid = localStorage.getItem("userid");
     
 
     const onClickUploadButton = async (evt) => {

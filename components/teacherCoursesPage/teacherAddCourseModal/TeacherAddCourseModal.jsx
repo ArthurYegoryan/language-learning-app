@@ -10,10 +10,12 @@ import { v4 as uuid } from "uuid";
 const TeacherAddCourseModal = ({ setIsModalOpen, isCoursesChanged, setIsCoursesChanged, setEmptyDataText }) => {
     const [ courseName, setCourseName ] = useState("");
     const [ languageType, setLanguageType ] = useState("js");
-    const { userid } = useSelector((state) => state.auth.value);
+    let { userid } = useSelector((state) => state.auth.value);
     const [ isSuccessfullyAdded, setIsSuccessfullyAdded ] = useState(false);
     const [ courseNameError, setCourseNameError ] = useState(false);
     const [ emptyUsernameError, setEmptyUsernameError ] = useState(false);
+
+    if (!userid) userid = localStorage.getItem("userid");
 
     const courseInfo = {
         courseName,
