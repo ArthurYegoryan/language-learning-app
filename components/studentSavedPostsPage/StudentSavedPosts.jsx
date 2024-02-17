@@ -15,8 +15,10 @@ const StudentSavedPosts = () => {
     const [ teachers, setTeachers ] = useState([]);
     const [ postModal, setPostModal ] = useState(false);
     const [ selectedPost, setSelectedPost ] = useState({});
-    const { userid } = useSelector((state) => state.auth.value);
+    let { userid } = useSelector((state) => state.auth.value);
     const { push } = useRouter();
+
+    if (!userid) userid = localStorage.getItem("userid");
 
     const onClickHome = () => {
         push("/student");
@@ -47,29 +49,18 @@ const StudentSavedPosts = () => {
 
             setTeachers(teachers);
 
-            console.log("Saved posts: ", JSON.stringify(savedPosts, null, 2));
-            console.log("User id: ", userid);
-
             const studentSavedPosts = savedPosts.filter(savedPost => savedPost.studentId === userid);
 
             if (studentSavedPosts.length) {
                 setStudentSavedPosts(studentSavedPosts);
             } else {
                 setIsEmptySavedPosts(true);
-            }            
-
-            console.log("Student saved posts: ", studentSavedPosts);
+            }
         };
         fetchSavedPostsData();
     }, []);
 
     const getUsernameByID = (post) => {
-        console.log("Test");
-        console.log("Teachers: ", JSON.stringify(teachers, null, 2));
-        console.log("Current post: ", JSON. stringify(post, null, 2));
-
-        console.log(JSON.stringify(teachers.filter((teacher) => teacher.id === post.authorId)[0].username, null, 2));
-
         return teachers.filter((teacher) => teacher.id === post.authorId)[0].username;
     };
 

@@ -131,6 +131,7 @@
 }
 
 .saved-posts-empty-text-div {
+    position: absolute;
     text-align: center;
     margin-top: 200px;
     font-size: 40px;

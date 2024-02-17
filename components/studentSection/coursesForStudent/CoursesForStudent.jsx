@@ -16,7 +16,9 @@ const CoursesForStudent = () => {
     const [ isStartedCourse, setIsStartedCourse ] = useState(false);
     const [ openCloseStartCourseModal, setOpenCloseStartCourseModal ] = useState(false);
     const [ openCloseStartCourseErrorModal, setOpenCloseStartCourseErrorModal ] = useState(false);
-    const { userid } = useSelector((state) => state.auth.value);
+    let { userid } = useSelector((state) => state.auth.value);
+
+    if (!userid) userid = localStorage.getItem("userid");
 
     useEffect(() => {
         const fetchCoursesData = async () => {

@@ -3,7 +3,11 @@ import "./UserContainer.css";
 import P from "@/generalComponents/texts/P.component";
 
 const UserContainer = () => {
-    const { username } = useSelector((state) => state.auth.value);
+    let { username } = useSelector((state) => state.auth.value);
+
+    if (!username) {
+        username = localStorage.getItem("username");
+    }
 
     return (
         <div className="user-container">

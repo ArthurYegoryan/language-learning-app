@@ -15,8 +15,10 @@ const TeacherPostsPage = () => {
     const [ postsData, setPostsData ] = useState([]);
     const [ emptyDataText, setEmptyDataText ] = useState(false);
     const [ isPostsChanged, setIsPosChanged ] = useState(false);
-    const { userid } = useSelector((state) => state.auth.value)
+    let { userid } = useSelector((state) => state.auth.value);
     const { push } = useRouter();
+
+    if (!userid) userid = localStorage.getItem("userid");
 
     const onClickHome = () => {
         push("/teacher");

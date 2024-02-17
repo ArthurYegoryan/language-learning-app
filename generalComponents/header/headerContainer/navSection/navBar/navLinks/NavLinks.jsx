@@ -3,8 +3,9 @@ import MenuLink from "@/generalComponents/linkComponents/menuLink/MenuLink";
 import { useSelector } from "react-redux";
 
 const NavLinks = () => {
-    const { role } = useSelector((state) => state.auth.value);
-    console.log("Role: ", role);
+    let { role } = useSelector((state) => state.auth.value);
+
+    if (!role) role = localStorage.getItem("role");
 
     return (
         <nav className="nav-links">

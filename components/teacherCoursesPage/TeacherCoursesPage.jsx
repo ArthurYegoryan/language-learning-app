@@ -15,8 +15,10 @@ const TeacherCoursesPage = () => {
     const [ isCoursesChanged, setIsCoursesChanged ] = useState(false);
     const [ coursesData, setCoursesData ] = useState([]);
     const [ emptyDataText, setEmptyDataText ] = useState(false);
-    const { userid } = useSelector((state) => state.auth.value)
+    let { userid } = useSelector((state) => state.auth.value);
     const { push } = useRouter();
+
+    if (!userid) userid = localStorage.getItem("userid");
 
     const onClickHome = () => {
         push("/teacher");

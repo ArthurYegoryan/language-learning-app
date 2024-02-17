@@ -14,7 +14,9 @@ const PostsForStudent = () => {
     const [ postModal, setPostModal ] = useState(false);
     const [ selectedPost, setSelectedPost ] = useState({});
     const [ isSavedPostAdded, setIsSavedPostAdded ] = useState(false);
-    const { userid } = useSelector((state) => state.auth.value);
+    let { userid } = useSelector((state) => state.auth.value);
+
+    if (!userid) userid = localStorage.getItem("userid");
 
     useEffect(() => {
         const fetchPostsData = async () => {
