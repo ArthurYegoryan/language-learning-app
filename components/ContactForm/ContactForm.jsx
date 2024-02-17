@@ -3,6 +3,8 @@
 import React, { useState } from 'react';
 import styles from './ContactForm.module.css';
 import FormField from './FormField';
+import Button from '@/generalComponents/button/Button.component';
+import { useRouter } from "next/navigation";
 
 const ContactForm = () => {
     const [formData, setFormData] = useState({
@@ -12,6 +14,11 @@ const ContactForm = () => {
         message: '',
     });
     const [error, setError] = useState('');
+    const { push } = useRouter();
+
+    const goHomeButtonHandler = () => {
+        push("/");
+    };
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.id]: e.target.value });
@@ -47,6 +54,10 @@ const ContactForm = () => {
 
     return (
         <div className={styles.mainContainer}>
+            <Button label="HOME" 
+                className={styles.contactUsGoHomeButton}
+                onClickHandler={goHomeButtonHandler}
+            />
             <section className={styles.contactInfoMain}>
                 <div className={styles.container}>
                     <div className={styles.titleMain}>

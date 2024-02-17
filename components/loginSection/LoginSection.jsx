@@ -42,6 +42,8 @@ const LoginSection = () => {
     const checkLogin = (evt) => {
         evt.preventDefault();
 
+        let isUserFind = false;
+
         userData.forEach((user) => {
             if (user.username === username && user.password === password) {
                 dispatch(logIn(username));
@@ -53,6 +55,8 @@ const LoginSection = () => {
                 localStorage.setItem('userid', user.id);
                 localStorage.setItem('role', user.role);
 
+                isUserFind = true;
+
                 if (user.role === 'student') {
                     push('/student');
                 } else {
@@ -60,7 +64,8 @@ const LoginSection = () => {
                 }
             }
         });
-        setShowErrorUserPass(true);
+        
+        if (!isUserFind) setShowErrorUserPass(true);
     };
 
     return (
