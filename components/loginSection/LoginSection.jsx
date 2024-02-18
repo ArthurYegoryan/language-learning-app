@@ -50,10 +50,10 @@ const LoginSection = () => {
                 dispatch(logInUserid(user.id));
                 dispatch(logInUserRole(user.role));
 
-                localStorage.setItem('isUserLoggedIn', true);
-                localStorage.setItem('username', username);
-                localStorage.setItem('userid', user.id);
-                localStorage.setItem('role', user.role);
+                window.localStorage.setItem('isUserLoggedIn', true);
+                window.localStorage.setItem('username', username);
+                window.localStorage.setItem('userid', user.id);
+                window.localStorage.setItem('role', user.role);
 
                 isUserFind = true;
 
