@@ -113,7 +113,7 @@ const PostsForStudent = () => {
                                         <button disabled className="s-all-post-saved-button">Saved</button> :
                                         <Button label="Save" 
                                             className="s-all-save-post-button"
-                                            onClickHandler={() => onClickSaveButton(post)} 
+                                            onClickHandler={() => onClickSaveButton(post)}
                                         />
                                     }                                    
                                 </div>
