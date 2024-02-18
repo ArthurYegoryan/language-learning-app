@@ -1,5 +1,5 @@
 import LinkComponent from '@/generalComponents/linkComponents/homeLink/LinkComponent';
-import './Navbar.css';
+import './NavBar.css';
 
 const Navbar = () => {
     return (
