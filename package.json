@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@formspree/react": "^2.5.1",
     "@geist-ui/react": "^2.2.5",
     "@reduxjs/toolkit": "^2.2.1",
     "firebase": "^10.8.0",

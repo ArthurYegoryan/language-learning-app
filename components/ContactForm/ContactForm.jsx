@@ -27,18 +27,46 @@ const ContactForm = () => {
             !message.trim()
         ) {
             setError('Please fill in all fields.');
-            return;
+            return false;
         }
 
         const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailPattern.test(email.trim())) {
             setError('Please enter a valid email address.');
+            return false;
+        }
+
+        return true;
+    };
+    async function handleSubmit(event) {
+        event.preventDefault();
+
+        if (!validateForm()) {
             return;
         }
 
-        console.log(formData);
-        clearForm();
-    };
+        const formDataToSend = {
+            ...formData,
+        };
+
+        formDataToSend.access_key = 'de9b8695-f7a3-4248-b2bb-0666dbefca24';
+
+        const response = await fetch('https://api.web3forms.com/submit', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                Accept: 'application/json',
+            },
+            body: JSON.stringify(formDataToSend),
+        });
+        const result = await response.json();
+        if (result.success) {
+            console.log(result);
+            clearForm();
+        } else {
+            console.error(result);
+        }
+    }
 
     const clearForm = () => {
         setFormData({ firstName: '', lastName: '', email: '', message: '' });
@@ -48,7 +76,7 @@ const ContactForm = () => {
     return (
         <div className={styles.mainContainer}>
             <section className={styles.contactInfoMain}>
-                <div className={styles.container}>
+                <div className={styles.FormContainer}>
                     <div className={styles.titleMain}>
                         <h3 className={styles.titleStyle}>Contact Us</h3>
                         <p className={styles.subTitleStyle}>
@@ -56,7 +84,11 @@ const ContactForm = () => {
                         </p>
                     </div>
                     <div className={styles.contact}>
-                        <form method='post'>
+                        <form
+                            onSubmit={handleSubmit}
+                            action='https://formsubmit.co/el/darume'
+                            method='POST'
+                        >
                             <div className={styles.row}>
                                 <div className={styles.leftColumn}>
                                     <FormField
@@ -97,9 +129,8 @@ const ContactForm = () => {
                             >
                                 <div className='btn'>
                                     <button
-                                        type='button'
+                                        type='submit'
                                         className={`${styles.customBtn} ${styles.btn1}`}
-                                        onClick={validateForm}
                                     >
                                         Send Now
                                     </button>
