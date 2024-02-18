@@ -18,7 +18,7 @@ const StudentSavedPosts = () => {
     let { userid } = useSelector((state) => state.auth.value);
     const { push } = useRouter();
 
-    if (!userid) userid = localStorage.getItem("userid");
+    if (!userid) userid = window.localStorage.getItem("userid");
 
     const onClickHome = () => {
         push("/student");
