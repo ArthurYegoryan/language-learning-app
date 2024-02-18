@@ -13,3 +13,42 @@
 .button:active {
     opacity: 1;
 }
+
+/* .button {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+    width: 140px;
+    height: 35px;
+    padding-left: 0;
+}
+
+.button:hover {
+    opacity: 0.8;
+}
+
+.button:active {
+    opacity: 1;
+} */
+
+.login-button,
+.reg-continue-button {
+    padding: 12px;
+    border-radius: 8px;
+    border: 0;
+    color: white;
+    background-color: blue;
+    font-weight: bolder;
+    width: 97%;
+    margin-right: 15px;
+    margin-left: 15px;
+}
+
+.teacher-add-info-buttons {
+    height: 35px;
+    padding: 15px;
+    display: flex;
+    justify-content: space-around;
+}

@@ -1,8 +1,8 @@
+import StudentSection from "@/components/studentSection/StudentPage";
+
 const StudentPage = () => {
     return (
-        <section>
-            Student page
-        </section>
+        <StudentSection />
     );
 };
 

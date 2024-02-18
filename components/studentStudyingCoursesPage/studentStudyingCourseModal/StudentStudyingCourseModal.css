@@ -1,0 +1,104 @@
+.s-studying-course-videos-modal, .s-studying-course-videos-overlay {
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: fixed;
+}
+
+.s-studying-course-videos-overlay {
+    background: rgba(49,49,49,0.8);
+}
+
+.s-studying-course-videos-modal-content {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    line-height: 1.4;
+    background: #f1f1f1;
+    padding: 14px 28px;
+    margin-top: 50px;
+    border-radius: 10px;
+    max-width: 600px;
+    min-width: 300px;
+    max-height: 800px;
+    overflow-y: scroll;
+}
+.s-studying-course-videos-modal-content::-webkit-scrollbar {
+    display: none;
+}
+
+.s-studying-course-modal-title {
+    text-align: center;
+    font-weight: bold;
+    font-size: 25px;
+    margin-bottom: 20px;
+}
+
+.s-studying-course-modal-video-container {
+    border: 1px solid gray;
+    border-radius: 10px;
+    margin-bottom: 5px;
+}
+
+.s-studying-course-modal-video-data {
+    display: flex;
+}
+
+.s-studying-course-modal-video-data-image {
+    margin: 5px;
+    margin-right: 10px;
+    width: 40px;
+    border: 1px solid gray;
+    border-radius: 10px;
+}
+
+.s-studying-course-modal-video-data-image:hover {
+    cursor: pointer;
+    background-color: green;
+}
+
+.s-studying-course-modal-video-data-image > img {
+    width: 100%;
+}
+
+.s-studying-course-modal-video-data-name-description {
+    display: flex;
+}
+
+.s-studying-course-modal-video-data-name {
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+.s-studying-course-video-download-error-text {
+    text-align: start;
+    color: red;
+    margin-top: 0;
+    margin-left: 5px;
+    margin-bottom: 0;
+    font-size: 14px;
+}
+
+.s-studying-course-video-download-manually-link {
+    text-align: start;
+    color: blue;
+    font-size: 12px;
+}
+
+.s-studying-course-empty-video-text-div {
+    text-align: center;
+    font-size: 20px;
+}
+
+.s-studying-course-close-modal-button-div {
+    text-align: center;
+}
+
+.s-studying-course-close-modal-button {
+    background-color: red;
+    color: white;
+}

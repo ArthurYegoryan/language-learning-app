@@ -1,10 +1,11 @@
 .p-sign-up {
     text-align: center;
-    color: aqua;
     font-size: 30px;
+    margin-top: 30px;
+    margin-bottom: 25px;
 }
 
-.reg-input-div {
+/* .reg-input-div {
     margin-bottom: 5px;
 }
 
@@ -33,4 +34,78 @@
     color: red;
     width: 200px;
     margin-top: 0;
+}
+
+.reg-area-go-to-login-div,
+.reg-area-back-home-link-div {
+    text-align: end;
+}
+
+.reg-area-go-to-login-div {
+    margin-top: 15px;
+}
+
+.reg-area-back-home-link-div {
+    margin-top: 5px;
+}
+
+.reg-area-go-to-login-link,
+.reg-area-back-home-link {
+    color: white;
+    text-decoration: none;
+} */
+
+/* body {
+       background-color: #001660;
+} */
+
+.registration-section {
+    background-color: #001660;
+}
+
+
+.main-registration-page {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+    width: 500px;
+    height: 650px;
+    border: 1px solid gray;
+    background-color: white;
+    border-radius: 20px;
+}
+
+.form-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.submit-area {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid gray;
+    padding: 50px;
+    /* padding-left: 30px;
+    margin-right: 30px; */
+    width: 400px;
+}
+
+.reg-role-input-div {
+    color: black;
+    font-size: 20px;
+    padding-bottom: 15px;
+    margin-left: 20px;
+}
+
+.reg-area-go-to-login-div,
+.reg-area-back-home-link-div {
+    margin-top: 10px;
+    margin-left: 20px;
+}
+
+.reg-area-go-to-login-link,
+.reg-area-back-home-link {
+    text-decoration: none;
 }

@@ -1,0 +1,13 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.s-page-content {
+    padding: 10px;
+    z-index: 1;
+}
+
+.s-page-content-left-margin {
+    margin-left: 280px;
+}

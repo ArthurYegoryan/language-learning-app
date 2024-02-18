@@ -89,8 +89,6 @@ const RegistrationSection = () => {
         if (role === "teacher") userAddInfo = teacherAddInfo;
         else userAddInfo = studentAddInfo;
 
-        console.log("Userinfo before add: " + JSON.stringify(userInfo, null, 2));
-
         const added = await addUserDataToFireStore(userInfo, userAddInfo);
 
         if (added) {
@@ -111,6 +109,7 @@ const RegistrationSection = () => {
     };
 
     return (
+        <>
         <section className="registration-section">
             {showMainRegistration &&
                 <MainRegistrationPage setUsername={setUsername}
@@ -145,6 +144,8 @@ const RegistrationSection = () => {
                 />
             }
         </section>
+       
+        </>
     );
 };
 

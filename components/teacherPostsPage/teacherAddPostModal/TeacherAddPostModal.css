@@ -1,0 +1,67 @@
+.t-add-post-modal-container {
+    position: absolute;
+    right: 0;
+    margin-right: 10px;
+    margin-top: 35px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.t-add-post-modal {
+    width: 250px;
+    border: 1px solid gray;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: blue;
+}
+
+.t-add-post-modal-header {
+    text-align: center;
+    font-size: 25px;
+}
+
+.t-add-post-modal-header-text {
+    font-weight: bold;
+    margin-top: 0;
+    color: white;
+}
+
+.t-add-post-modal-content {
+    border: 1px solid white;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.t-add-post-name-input {
+    border: 1px solid white;
+    border-radius: 5px;
+    margin: auto;
+    margin-bottom: 10px;
+}
+
+.t-add-post-text-input {
+    border: 1px solid white;
+    border-radius: 5px;
+}
+
+.t-add-post-success-add-text {
+    color: yellowgreen;
+}
+
+.empty-username-error-text,
+.t-add-post-name-empty-error {
+    color: red;
+}
+
+.t-new-post-submit-button {
+    background-color: green;
+    color: white;
+    margin-right: 5px;
+}
+
+.t-new-post-cancel-button {
+    background-color: red;
+    color: white;
+    margin-left: 5px;
+}

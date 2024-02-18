@@ -12,6 +12,7 @@ const LogoutContainer = () => {
 
     const onClickHandler = () => {
         dispatch(logOut());
+        localStorage.clear();
         router.push("/login");
     }
 

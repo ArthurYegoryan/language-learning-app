@@ -1,0 +1,32 @@
+.teacher-courses-section {
+    padding: 10px;
+}
+
+.add-new-course-div {
+    display: flex;
+    justify-content: space-between;
+}
+
+.go-home-button {
+    width: 30px;
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+}
+
+.go-home-button > img {
+    width: 100%;
+}
+
+.add-new-course-button {
+    position: relative;
+    background-color: green;
+    color: white;
+    margin-bottom: 5px;
+}
+
+.teacher-empty-course-text-div {
+    text-align: center;
+    margin-top: 200px;
+    font-size: 40px;
+}

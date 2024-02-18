@@ -8,8 +8,9 @@
     width: 25px;
 }
 
-.user-container > p {
+.user-username {
     display: block;
     color: gray;
     margin-right: 15px;
+    margin-top: 12px;
 }
