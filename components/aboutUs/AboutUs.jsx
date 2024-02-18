@@ -28,7 +28,7 @@ const AboutUs = () => {
             <p className="about-us-introduction-text">new in the programming world or have the desire and motivation</p>
             <p className="about-us-introduction-text">to learn.</p>
             <p>Be sure that this can be the beginning of your path to great success!</p>
-            <p>So, let's try!!!</p>
+            <p>So, let{`s`}s try!!!</p>
         </div>
         <Button label="HOME" 
                 className="about-us-go-home-button"
