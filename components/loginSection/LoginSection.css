@@ -101,9 +101,13 @@
     border-radius: 20px;
 }
 
-
 .login-area-go-to-reg-div,
 .login-area-back-home-link-div {
     padding-top: 10px;
     margin-left: 20px;
+}
+
+.login-area-go-to-reg-link,
+.login-area-back-home-link {
+    text-decoration: none;
 }
